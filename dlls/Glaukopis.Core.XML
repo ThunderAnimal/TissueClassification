@@ -1,0 +1,1074 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Glaukopis.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Glaukopis.Core.Analysis.ClusterDefinition`1">
+            <summary>
+            Zerlegung eines Merkmalsraums
+            </summary>
+            <typeparam name="T">Merkmalstyp</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ClusterDefinition`1.#ctor(`0[])">
+            <summary>
+            erzeugt die Zerlegung aus den angegebenen Grenzen;
+            der Typparameter muß von IComparable ableiten
+            </summary>
+            <param name="borders">Grenzen</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ClusterDefinition`1.#ctor(Glaukopis.Core.Analysis.IGenericDistribution{`0})">
+            <summary>
+            erzeugt die Zerlegung aus den Quantilen der Verteilung;
+            der Typparameter muß von IComparable ableiten
+            </summary>
+            <param name="distribution">Verteilung</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ClusterDefinition`1.#ctor(System.Collections.Generic.IList{Glaukopis.Core.Analysis.IRange{`0}})">
+            <summary>
+            erzeugt und initialisiert die Zerlegung
+            </summary>
+            <param name="ranges">Cluster</param>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ClusterDefinition`1.Clusters">
+            <summary>
+            Cluster
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ClusterDefinition`1.Assign(`0)">
+            <summary>
+            ordnet einen Wert einem Cluster zu
+            </summary>
+            <param name="value">Wert</param>
+            <returns>index des Clusters in <see cref="P:Glaukopis.Core.Analysis.ClusterDefinition`1.Clusters"/></returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.Distribution`1">
+            <summary>
+            Verteilung für ordinalskalierbare Typen
+            </summary>
+            <typeparam name="T">ordinalskalierbarer Typ</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Distribution`1.#ctor">
+            <summary>
+            erzeugt die Verteilung
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Distribution`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            erzeugt und initialisiert die Verteilung mit den angegebenen Elementen
+            </summary>
+            <param name="values">Elemente</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Distribution`1.ensureSorting">
+            <summary>
+            stellt sicher das die zu Grunde liegende Liste sortiert ist
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Distribution`1.CalculateMode">
+            <summary>
+            berechnet den Modus bzw. die Modi der Verteilung
+            </summary>
+            <returns>Aufzählung der Modi</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.DoubleDistribution">
+            <summary>
+            Verteilung für double-Werte
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.DoubleDistribution.#ctor">
+            <summary>
+            erzeugt die Verteilung
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.DoubleDistribution.#ctor(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            erzeugt und initialisiert die Verteilung mit den angegebenen Elementen
+            </summary>
+            <param name="values">Elemente</param>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Mean">
+            <summary>
+            berechnet den Mittelwert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.StandardDeviation">
+            <summary>
+            berechnet die Standardabweichung
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Skewness">
+            <summary>
+            berechnet die Schiefe
+            </summary>
+            <remarks>https://de.wikipedia.org/wiki/Schiefe_%28Statistik%29</remarks>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Minimum">
+            <summary>
+            0-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Q25">
+            <summary>
+            0,25-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Median">
+            <summary>
+            0,5-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Q75">
+            <summary>
+            0,75-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.DoubleDistribution.Maximum">
+            <summary>
+            1-Quantil
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.DoubleDistribution.Reduce">
+            <summary>
+            reduziert die Verteilung auf die definierten Eigenschaften
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.GenericDistribution`1">
+            <summary>
+            Verteilung für ordinalskalierbare Typen
+            </summary>
+            <typeparam name="T">Typ der Elemente</typeparam>
+        </member>
+        <member name="F:Glaukopis.Core.Analysis.GenericDistribution`1.isSorted">
+            <summary>
+            true wenn <see cref="F:Glaukopis.Core.Analysis.GenericDistribution`1.list"/> sortiert ist, false sonst
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Core.Analysis.GenericDistribution`1.list">
+            <summary>
+            zugrunde liegende Liste
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.#ctor(System.Comparison{`0})">
+            <summary>
+            erzeugt die Verteilung
+            </summary>
+            <param name="comparison">Vergleichsmethode für die Elemente</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Comparison{`0})">
+            <summary>
+            erzeugt und initialisiert die Verteilung mit den angegebenen Elementen
+            </summary>
+            <param name="values">Elemente</param>
+            <param name="comparison">Vergleichsmethode für die Elemente</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.ensureSorting">
+            <summary>
+            stellt sicher das die zu Grunde liegende Liste sortiert ist
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.Add(`0)">
+            <summary>
+            fügt ein Element hinzu
+            </summary>
+            <param name="item">hinzuzufügendes Element</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            fügt eine Menge von Elementen hinzu
+            </summary>
+            <param name="collection">hinzuzufügende Elemente</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.CalculateMode">
+            <summary>
+            berechnet den Modus bzw. die Modi der Verteilung
+            </summary>
+            <returns>Aufzählung der Modi</returns>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Minimum">
+            <summary>
+            0-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Q25">
+            <summary>
+            0,25-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Median">
+            <summary>
+            0,5-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Q75">
+            <summary>
+            0,75-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Maximum">
+            <summary>
+            1-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.GenericDistribution`1.Count">
+            <summary>
+            Anzahl der enthaltenen Elemente
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.Reduce``1(System.Func{`0,``0})">
+            <summary>
+            reduziert die Verteilung auf die 5 definierten Quantile und konvertiert den Typ
+            </summary>
+            <typeparam name="TNew">neuer Typ</typeparam>
+            <param name="convert">Konvertierungsmethode</param>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.GenericDistribution`1.Reduce">
+            <summary>
+            reduziert die Verteilung auf die 5 definierten Quantile
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IGenericDistribution`1">
+            <summary>
+            Beschreibung für Verteilungen
+            </summary>
+            <typeparam name="T">ordinalskalierbarer Typ</typeparam>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IGenericDistribution`1.Q25">
+            <summary>
+            0,25-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IGenericDistribution`1.Median">
+            <summary>
+            0,5-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IGenericDistribution`1.Q75">
+            <summary>
+            0,75-Quantil
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IGenericDistribution`1.Reduce``1(System.Func{`0,``0})">
+            <summary>
+            reduziert die Verteilung auf die 5 definierten Quantile und konvertiert den Typ
+            </summary>
+            <typeparam name="TNew">neuer Typ</typeparam>
+            <param name="convert">Konvertierungsmethode</param>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IGenericDistribution`1.Reduce">
+            <summary>
+            reduziert die Verteilung auf die 5 definierten Quantile
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IDoubleDistribution">
+            <summary>
+            Beschreibung für Verteilungen von double-Werten
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IDoubleDistribution.Mean">
+            <summary>
+            Mittelwert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IDoubleDistribution.StandardDeviation">
+            <summary>
+            Standardabweichung
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IDoubleDistribution.Skewness">
+            <summary>
+            Schiefe
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IDoubleDistribution.Reduce">
+            <summary>
+            reduziert die Verteilung auf die definierten Eigenschaften
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IDoubleDistributionExtensions">
+            <summary>
+            Erweiterung für double-Verteilungen
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IDoubleDistributionExtensions.CoefficientOfVariation(Glaukopis.Core.Analysis.IDoubleDistribution)">
+            <summary>
+            berechnet den Variationskoeffizient (StandardDeviation/Mean)
+            </summary>
+            <param name="distribution">Verteilung</param>
+            <returns>Variationskoeffizient</returns>
+            <remarks>https://de.wikipedia.org/wiki/Variationskoeffizient</remarks>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IDoubleDistributionExtensions.RelativeInterquartileRange(Glaukopis.Core.Analysis.IDoubleDistribution)">
+            <summary>
+            berechnet den Quartilsdispersionskoeffizient (Q75-Q25)/Median
+            </summary>
+            <param name="distribution">Verteilung</param>
+            <returns>Quartilsdispersionskoeffizient</returns>
+            <remarks>https://de.wikipedia.org/wiki/Variationskoeffizient#Empirischer_Quartilsdispersionskoeffizient</remarks>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IDoubleDistributionExtensions.QuartileCoefficientOfDispersion(Glaukopis.Core.Analysis.IDoubleDistribution)">
+            <summary>
+            berechnet den Quartilsdispersionskoeffizient ((Q75-Q25)/(Q75+Q25))
+            </summary>
+            <param name="distribution">Verteilung</param>
+            <returns>Quartilsdispersionskoeffizient</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IDoubleDistributionExtensions.Range(Glaukopis.Core.Analysis.IDoubleDistribution)">
+            <summary>
+            berechnet die Breite der Verteilung (Max-Min)
+            </summary>
+            <param name="distribution"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IEnumerableExtensions">
+            <summary>
+            Erweiterungen für Aufzählungen
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.Normalize(System.Collections.Generic.IEnumerable{System.Double},Glaukopis.Core.Analysis.Range{System.Double})">
+            <summary>
+            normalisiert die Aufzählung
+            </summary>
+            <param name="source">Eingabewerte</param>
+            <param name="range">Begrenzung gegen die normalisiert wird, falls nicht angegeben wird sie aus der Aufzählung erzeugt</param>
+            <returns>Liste mit den normalisierten Werten</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.Normalize(System.Collections.Generic.IList{System.Double}[])">
+            <summary>
+            normalisiert mehrere Aufzählungen
+            </summary>
+            <param name="sources">Aufzählungen</param>
+            <returns>normalisierte Aufzählungen</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.Normalize(Glaukopis.Core.Analysis.Range{System.Double},System.Collections.Generic.IList{System.Double}[])">
+            <summary>
+            normalisiert mehrere Aufzählungen
+            </summary>
+            <param name="range">Begrenzung gegen die normalisiert wird</param>
+            <param name="sources">Aufzählungen</param>
+            <returns>normalisierte Aufzählungen</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.Invert(System.Collections.Generic.IEnumerable{System.Double},System.Nullable{System.Double})">
+            <summary>
+            Invertiert die Aufzählung gegen einen Wert
+            </summary>
+            <param name="source">Eingabewerte</param>
+            <param name="reference">Wert gegen den invertiert werden soll, falls nicht angegeben wird das Maximum der Eingabewerte verwendet</param>
+            <returns></returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.NormalizeBySum(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            normalisiert die Aufzählung gegen die Summe der Werte
+            </summary>
+            <param name="source">Eingabewerte</param>
+            <returns>Liste mit den normalisierten Werten</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.BhattacharyyaDistance(System.Collections.Generic.IEnumerable{System.Double},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            berechnet die Bhattacharyya distance zwischen zwei Histogrammen
+            http://en.wikipedia.org/wiki/Bhattacharyya_distance
+            </summary>
+            <param name="histogram1">erstes Histogramm</param>
+            <param name="histogram2">zweites Histogramm</param>
+            <returns>Bhattacharyya distance</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IEnumerableExtensions.Rearrange(System.Collections.Generic.IEnumerable{System.Double},System.Int32,Glaukopis.Core.Analysis.WeightingMethod)">
+            <summary>
+            erzeugt aus dem Eingabe-Histogramm ein neues Histogrammm mit der angegebenen Anzahl von bins
+            </summary>
+            <param name="source">Eingabe-Histogramm</param>
+            <param name="bins">Anzahl der bins</param>
+            <param name="method">Wichtungsmethode</param>
+            <returns>Histogramm</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.WeightingMethod">
+            <summary>
+            Bezeichnung für die Wichtungsart;
+            für die Berechnung von Durchschnittswerten
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Core.Analysis.WeightingMethod.WeightedArithmeticMean">
+            <summary>
+            Arithmetisches Mittel
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Core.Analysis.WeightingMethod.WeightedHarmonicMean">
+            <summary>
+            Harmonisches Mittel
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IListExtensions">
+            <summary>
+            Erweiterungen für Listen, wenn diese eine diskrete Funktion oder ein Histogramm darstellen 
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IListExtensions.Shift``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            verschiebt die Rückgabewerte einer diskrete Funktion;
+            Werte größer source.Length werden vorn wieder eingefügt
+            </summary>
+            <typeparam name="T">Typ der Rückgabewerte</typeparam>
+            <param name="source">diskrete Funktion</param>
+            <param name="shift"></param>
+            <returns>verschobene Funktion</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IRange`1">
+            <summary>
+            Beschreibung für eindimensionale Begrenzungen (Minimum und Maximum) für ordinalskalierbare Typen
+            </summary>
+            <typeparam name="T">ordinalskalierbarer Typ</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRange`1.Contains(`0,System.Boolean)">
+            <summary>
+            prüft ob ein Element zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> liegt
+            </summary>
+            <param name="item">fragliches Element</param>
+            <param name="open">bestimmt ob das Intervall offen ist; falls true: <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> sind nicht enthalten</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRange`1.Contains(`0,System.Boolean,System.Boolean)">
+            <summary>
+            prüft ob ein Element zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> liegt
+            </summary>
+            <param name="item">fragliches Element</param>
+            <param name="excludingMinimum">gibt an ob das Intervall linksoffen ist</param>
+            <param name="excludingMaximum">gibt an ob das Intervall rechtsoffen ist</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IRangeDescription`1">
+            <summary>
+            Beschreibung für eindimensionale Begrenzungen (Minimum und Maximum) für ordinalskalierbare Typen
+            </summary>
+            <typeparam name="T">ordinalskalierbarer Typ</typeparam>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum">
+            <summary>
+            kleinstes Element
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum">
+            <summary>
+            größtes Element
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.IRangeDescription`1.Count">
+            <summary>
+            Anzahl der Elemente aus denen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> bestimmt wurde
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.IRangeDescriptionExtensions">
+            <summary>
+            Erweiterung für Instanzen von <see cref="T:Glaukopis.Core.Analysis.IRangeDescription`1"/>
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRangeDescriptionExtensions.Normalize(Glaukopis.Core.Analysis.IRangeDescription{System.Double},System.Double)">
+            <summary>
+            normalisiert den Wert zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> auf den Wertebereich [0,1]
+            </summary>
+            <param name="range">Beschreibung des Bereichs</param>
+            <param name="value">Eingabewert</param>
+            <returns>normalisierter Wert</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRangeDescriptionExtensions.Denormalize(Glaukopis.Core.Analysis.IRangeDescription{System.Double},System.Double)">
+            <summary>
+            entnormalisiert den Wert
+            </summary>
+            <param name="range">Beschreibung des Bereichs</param>
+            <param name="value">Eingabewert</param>
+            <returns>entnormalisierter Wert</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRangeDescriptionExtensions.Normalize(Glaukopis.Core.Analysis.IRangeDescription{System.UInt32},System.Double)">
+            <summary>
+            normalisiert den Wert zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> auf den Wertebereich [0,1]
+            </summary>
+            <param name="range">Beschreibung des Bereichs</param>
+            <param name="value">Eingabewert</param>
+            <returns>normalisierter Wert</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.IRangeDescriptionExtensions.Normalize(Glaukopis.Core.Analysis.IRangeDescription{System.Int32},System.Double)">
+            <summary>
+            normalisiert den Wert zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> auf den Wertebereich [0,1]
+            </summary>
+            <param name="range">Beschreibung des Bereichs</param>
+            <param name="value">Eingabewert</param>
+            <returns>normalisierter Wert</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.NearestNeighborClassification">
+            <summary>
+            Klasse für die Nächster-Nachbar-Klassifikation
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.NearestNeighborClassification.#ctor(System.Tuple{System.String,System.Double,System.Double,System.Boolean}[])">
+            <summary>
+            erzeugt die Instanz mit Beschreibungen der Dimensionen:
+            &lt;Bezeichnung,Minimum,Maximum,Geschlossenheit&gt;
+            </summary>
+            <param name="dimensionDescriptions">Auflistung der Beschreibungen der Dimensionen</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.NearestNeighborClassification.#ctor">
+            <summary>
+            erzeugt die Instanz für einen Merkmalsraum in dem alle Dimensionen gleich skaliert und unbenannt sind
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Core.Analysis.NearestNeighborClassification.Prototypes">
+            <summary>
+            Liste der Prototypen: &lt;Klassenname,Koordinate im Merkmalsraum&gt;
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.NearestNeighborClassification.DimensionDescriptions">
+            <summary>
+            Liste der Dimensionsbeschreibungen;
+            &lt;Bezeichnung,Minimum,Maximum,Geschlossenheit&gt;
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.NearestNeighborClassification.Classify(System.Double[],System.Double@)">
+            <summary>
+            klassifiziert eine Koordinate
+            </summary>
+            <param name="sample">Koordinate im Merkmalsraum</param>
+            <param name="distance">Abstand zum nächsten Prototypen</param>
+            <returns>Klassenname</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.NearestNeighborClassification.Classify(System.Double[])">
+            <summary>
+            klassifiziert einen Datenpunkt; ruft intern <see cref="M:Glaukopis.Core.Analysis.NearestNeighborClassification.Classify(System.Double[],System.Double@)"/> auf
+            </summary>
+            <param name="sample">Koordinate im Merkmalsraum</param>
+            <returns>Klassenname</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.ReadonlyDistribution`1">
+            <summary>
+            (schreibgeschützte) Verteilung die nur aus den Quantilen besteht
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDistribution`1.#ctor(`0,`0,`0,`0,`0,System.Int32)">
+            <summary>
+            erzeugt die Verteilung
+            </summary>
+            <param name="minimum">Minimum</param>
+            <param name="q25">0,25-Quantil</param>
+            <param name="median">0,5-Quantil</param>
+            <param name="q75">0,75-Quantil</param>
+            <param name="maximum">Maximum</param>
+            <param name="count">Anzahl der Elemente</param>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Minimum">
+            <summary>
+            0-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Maximum">
+            <summary>
+            1-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Count">
+            <summary>
+            Anzahl der Elemente
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Contains(`0,System.Boolean)">
+            <summary>
+            prüft ob ein Element zwischen <see cref="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Maximum"/> liegt
+            </summary>
+            <param name="item">fragliches Element</param>
+            <param name="open">bestimmt ob das Intervall offen ist; falls true: <see cref="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Maximum"/> sind nicht enthalten</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Q25">
+            <summary>
+            0,25-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Median">
+            <summary>
+            0,5-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Q75">
+            <summary>
+            0,75-Quantil
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Reduce``1(System.Func{`0,``0})">
+            <summary>
+            konvertiert den Typ der Verteilung
+            </summary>
+            <typeparam name="TNew">neuer Typ</typeparam>
+            <param name="convert">Konvertierungsmethode</param>
+            <returns>konvertierte Verteilung</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDistribution`1.Reduce">
+            <summary>
+            reduziert die Verteilung auf die 5 definierten Quantile
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution">
+            <summary>
+            schreibgeschützte Verteilung von double-Werten
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.#ctor(Glaukopis.Core.Analysis.IGenericDistribution{System.Double},System.Double,System.Double,System.Double)">
+            <summary>
+            erzeugt die Verteilung
+            </summary>
+            <param name="baseDistribution">Basisverteilung</param>
+            <param name="mean">Mittelwert</param>
+            <param name="standardDeviation">Standardabweichung</param>
+            <param name="skewness">Schiefe</param>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Mean">
+            <summary>
+            Mittelwert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.StandardDeviation">
+            <summary>
+            Standardabweichung
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Skewness">
+            <summary>
+            Schiefe
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Reduce">
+            <summary>
+            reduziert die Verteilung auf die definierten Eigenschaften
+            </summary>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Minimum">
+            <summary>
+            0-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Maximum">
+            <summary>
+            1-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Count">
+            <summary>
+            Anzahl der enthaltenen Elemente
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Q25">
+            <summary>
+            0,25-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Median">
+            <summary>
+            0,5-Quantil
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Q75">
+            <summary>
+            0,75-Quantil
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.ReadonlyDoubleDistribution.Reduce``1(System.Func{System.Double,``0})">
+            <summary>
+            reduziert die Verteilung auf die durch <see cref="T:Glaukopis.Core.Analysis.IDoubleDistribution"/> definierten Merkmale und konvertiert den Typ
+            </summary>
+            <typeparam name="TNew">neuer Typ</typeparam>
+            <param name="convert">Konvertierungsmethode</param>
+            <returns>reduzierte Verteilung</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Analysis.Range`1">
+            <summary>
+            eindimensionale Begrenzung (Minimum und Maximum) für ordinalskalierbare Typen
+            </summary>
+            <typeparam name="T">ordinalskalierbarer Typ</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.#ctor(System.Comparison{`0})">
+            <summary>
+            erzeugt die Begrenzung
+            </summary>
+            <param name="comparison">Vergleichsmethode für die Elemente, muß für Implementierungen von IComparable nicht angegeben werden</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.#ctor(`0,`0,System.Comparison{`0})">
+            <summary>
+            erzeugt eine Begrenzung
+            </summary>
+            <param name="minimum">Minimum</param>
+            <param name="maximum">Maximum</param>
+            <param name="comparison">Vergleichsmethode für die Elemente, muß für Implementierungen von IComparable nicht angegeben werden</param>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.Range`1.Minimum">
+            <summary>
+            kleinstes Element
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.Range`1.Maximum">
+            <summary>
+            größtes Element
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Analysis.Range`1.Count">
+            <summary>
+            Anzahl der hinzugefügten Elemente
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.Contains(`0,System.Boolean)">
+            <summary>
+            prüft ob ein Element zwischen <see cref="P:Glaukopis.Core.Analysis.Range`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.Range`1.Maximum"/> liegt
+            </summary>
+            <param name="item">fragliches Element</param>
+            <param name="open">bestimmt ob das Intervall offen ist; falls true: <see cref="P:Glaukopis.Core.Analysis.Range`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.Range`1.Maximum"/> sind nicht enthalten</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.Contains(`0,System.Boolean,System.Boolean)">
+            <summary>
+            prüft ob ein Element zwischen <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.IRangeDescription`1.Maximum"/> liegt
+            </summary>
+            <param name="item">fragliches Element</param>
+            <param name="excludingMinimum">gibt an ob das Intervall linksoffen ist</param>
+            <param name="excludingMaximum">gibt an ob das Intervall rechtsoffen ist</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.Add(`0)">
+            <summary>
+            fügt ein Element hinzu;
+            <see cref="P:Glaukopis.Core.Analysis.Range`1.Minimum"/> bzw. <see cref="P:Glaukopis.Core.Analysis.Range`1.Maximum"/> werden falls nötig aktualisiert
+            </summary>
+            <param name="item">Element</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.Clear">
+            <summary>
+            leert die Begrenzung
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.Add(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            fügt eine Menge von Elementen hinzu;
+            wird für den Objekt-Initializer benötigt
+            </summary>
+            <param name="items">Menge von Elementen</param>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.GetEnumerator">
+            <summary>
+            liefert den typisierten Enumerator, der nur <see cref="P:Glaukopis.Core.Analysis.Range`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.Range`1.Maximum"/> auflistet, oder nichts für <see cref="P:Glaukopis.Core.Analysis.Range`1.Count"/>=0
+            </summary>
+            <returns>typisierter Enumerator</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Analysis.Range`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            liefert einen Enumerator, der nur <see cref="P:Glaukopis.Core.Analysis.Range`1.Minimum"/> und <see cref="P:Glaukopis.Core.Analysis.Range`1.Maximum"/> auflistet, oder nichts für <see cref="P:Glaukopis.Core.Analysis.Range`1.Count"/>=0
+            </summary>
+            <returns>Enumerator</returns>
+        </member>
+        <member name="T:Glaukopis.Core.ConfusionMatrix">
+            <summary>
+            Wahrheitsmatrix
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.TruePositives">
+            <summary>
+            Anzahl der richtig positiven Elemente
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.FalsePositives">
+            <summary>
+            Anzahl der falsch positiven Elemente
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.FalseNegatives">
+            <summary>
+            Anzahl der falsch negativen Elemente
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.TrueNegatives">
+            <summary>
+            Anzahl der richtig negativen Elemente
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.PositivePredictiveValue">
+            <summary>
+            der positive Vorhersagewert (precision)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.TruePositiveRate">
+            <summary>
+            die Richtig-Positiv-Rate (recall,sensitivity)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.TrueNegativeRate">
+            <summary>
+            die Falsch-Positiv-Rate (specificity)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.FScore">
+            <summary>
+            das F(1)-Maß
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.ConfusionMatrix.WeightedFScore(System.Double)">
+            <summary>
+            berechnet das gewichtete F-Maß
+            </summary>
+            <param name="alpha">Wichtung [0,1]</param>
+            <returns>das F-Maß</returns>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.PositiveLikelihoodRatio">
+            <summary>
+            die positive likelihood ratio (LR+)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.ConfusionMatrix.NegativeLikelihoodRatio">
+            <summary>
+            die negative likelihood ratio (LR-)
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Classification.INearestNeighborClassification">
+            <summary>
+            Schnittstellenbeschreibung für die Nächster-Nachbar-Klassifikation
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.INearestNeighborClassification.DimensionDescriptions">
+            <summary>
+            Liste der Dimensionsbeschreibungen;
+            &lt;Bezeichnung,Minimum,Maximum,Geschlossenheit&gt;
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.INearestNeighborClassification.PrototypeEnumeration">
+            <summary>
+            Aufzählung der Prototypen
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Classification.IPrototype">
+            <summary>
+            Definition für Prototypen
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.IPrototype.ClassName">
+            <summary>
+            Name der Klasse zu der der Prototyp gehört
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.IPrototype.Item(System.Int32)">
+            <summary>
+            liefert den Merkmalswert zu einem Index
+            </summary>
+            <param name="index">Index</param>
+            <returns>Merkmalswert</returns>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.IPrototype.Count">
+            <summary>
+            Anzahl der Merkmale des Prototyps
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Classification.NearestNeighborClassification`1">
+            <summary>
+            Klasse für die Nächster-Nachbar-Klassifikation
+            </summary>
+            <typeparam name="T">Typ der Prototypen</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.NearestNeighborClassification`1.#ctor(System.Tuple{System.String,System.Double,System.Double,System.Boolean}[])">
+            <summary>
+            erzeugt die Instanz mit Beschreibungen der Dimensionen:
+            &lt;Bezeichnung,Minimum,Maximum,Geschlossenheit&gt;
+            </summary>
+            <param name="dimensionDescriptions">Auflistung der Beschreibungen der Dimensionen</param>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.NearestNeighborClassification`1.#ctor">
+            <summary>
+            erzeugt die Instanz für einen Merkmalsraum in dem alle Dimensionen gleich skaliert und unbenannt sind
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Core.Classification.NearestNeighborClassification`1.Prototypes">
+            <summary>
+            Liste der Prototypen: &lt;Klassenname,Koordinate im Merkmalsraum&gt;
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.NearestNeighborClassification`1.PrototypeEnumeration">
+            <summary>
+            Aufzählung der Prototypen
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.Classification.NearestNeighborClassification`1.DimensionDescriptions">
+            <summary>
+            Liste der Dimensionsbeschreibungen;
+            &lt;Bezeichnung,Minimum,Maximum,Geschlossenheit&gt;
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.NearestNeighborClassification`1.Classify(System.Double[],System.Double@)">
+            <summary>
+            klassifiziert eine Koordinate
+            </summary>
+            <param name="sample">Koordinate im Merkmalsraum</param>
+            <param name="distance">Abstand zum nächsten Prototypen</param>
+            <returns>Klassenname</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.NearestNeighborClassification`1.Classify(System.Double[])">
+            <summary>
+            klassifiziert einen Datenpunkt; ruft intern <see cref="M:Glaukopis.Core.Classification.NearestNeighborClassification`1.Classify(System.Double[],System.Double@)"/> auf
+            </summary>
+            <param name="sample">Koordinate im Merkmalsraum</param>
+            <returns>Klassenname</returns>
+        </member>
+        <member name="T:Glaukopis.Core.Classification.INearestNeighborClassificationExtensions">
+            <summary>
+            Erweiterungen für die Nächster-Nachbar-Klassifikation
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.INearestNeighborClassificationExtensions.Save(Glaukopis.Core.Classification.INearestNeighborClassification,System.String)">
+            <summary>
+            speichert die die Nächste-Nachbar-Klassifikation (Dimensionsbeschreibungen und Prototypen) in eine csv-Datei
+            </summary>
+            <param name="nearestNeighborClassification">Nächste-Nachbar-Klassifikation</param>
+            <param name="fileName">Dateiname</param>
+        </member>
+        <member name="M:Glaukopis.Core.Classification.INearestNeighborClassificationExtensions.Load(System.String,System.String@)">
+            <summary>
+            lädt die Prototypen und die Dimensionsbeschreibungen aus einer csv-Datei
+            </summary>
+            <param name="fileName">Name der Datei</param>
+            <param name="errorMessage">Fehlermeldung</param>
+            <returns>null wenn ein Fehler aufgetreten ist</returns>
+        </member>
+        <member name="T:Glaukopis.Core.MatrixReader`1">
+            <summary>
+            Wrapper für Matrizen
+            </summary>
+            <typeparam name="T">Typ der enthaltenen Objekte</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.MatrixReader`1.#ctor(`0[0:,0:])">
+            <summary>
+            erzeugt den Wrapper
+            </summary>
+            <param name="matrix">zu umschließende Matrix</param>
+        </member>
+        <member name="P:Glaukopis.Core.MatrixReader`1.Item(System.Int32,System.Int32)">
+            <summary>
+            ruft das Element am angegebenen Index ab
+            </summary>
+            <param name="x">x-Index</param>
+            <param name="y">y-Index</param>
+            <returns>das Element am Index für gültige Indizes, null sonst</returns>
+        </member>
+        <member name="P:Glaukopis.Core.MatrixReader`1.Width">
+            <summary>
+            liefert die Breite(x) der Matrix
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Core.MatrixReader`1.Height">
+            <summary>
+            liefert die Höhe(y) der Matrix
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Core.Predicates">
+            <summary>
+            Utility-Klasse für Prädikate
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.Normalize(System.Double,System.Double,System.Double)">
+            <summary>
+            normalisiert einen Wert zwischen Minimum und Maximum auf den Wertebereich [0,1]
+            </summary>
+            <param name="value">Wert</param>
+            <param name="minimum">Minimum</param>
+            <param name="maximum">Maximum</param>
+            <returns>normalisierter Wert</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.DistanceInClosedDimensions(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            bestimmt den Abstand zwischen zwei Werten in geschlossenen Dimensionen
+            </summary>
+            <param name="value1">erster Wert</param>
+            <param name="value2">zweiter Wert</param>
+            <param name="minimum">Minimum der Dimension</param>
+            <param name="maximum">Maximum der Dimension</param>
+            <returns>Abstand</returns>
+        </member>
+        <member name="F:Glaukopis.Core.Predicates.DoubleTolerance">
+            <summary>
+            Toleranz für den Vergleich von double-Werten mit <see cref="M:Glaukopis.Core.Predicates.AreEqual(System.Double,System.Double,System.Nullable{System.Double})"/>
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.AreEqual(System.Double,System.Double,System.Nullable{System.Double})">
+            <summary>
+            prüft die Gleicheit zweier double-Werte unter Berücksichtigung einer Toleranz
+            </summary>
+            <param name="value1">erster Wert</param>
+            <param name="value2">zweiter Wert</param>
+            <param name="tolerance">erlaubte Toleranz beim Vergleich, ist kein Wert angegeben wird <see cref="F:Glaukopis.Core.Predicates.DoubleTolerance"/> verwendet</param>
+            <returns>true wenn value1 gleich value2 innerhalb der Toleranz; false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.IsNumericValue(System.Double)">
+            <summary>
+            prüft ob der Wert eine Zahl darstellt
+            </summary>
+            <param name="d">zu prüfender Wert</param>
+            <returns>false wenn NaN oder unendlich, true sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.Save(System.Double[0:,0:],System.String)">
+            <summary>
+            speichert eine Matrix von Gleitkommazahlen in eine csv-Datei
+            </summary>
+            <param name="matrix">zu speichernde Matrix</param>
+            <param name="filename">Name der Datei</param>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.Save2(System.Double[0:,0:],System.String)">
+            <summary>
+            speichert eine Matrix von Gleitkommazahlen in eine csv-Datei
+            </summary>
+            <param name="matrix">zu speichernde Matrix</param>
+            <param name="filename">Name der Datei</param>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.LoadMatrix(System.String)">
+            <summary>
+            lädt eine mit <see cref="M:Glaukopis.Core.Predicates.Save(System.Double[0:,0:],System.String)"/> gespeicherte Matrix
+            </summary>
+            <param name="filename">Name der Datei</param>
+            <returns>geladende Matrix</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.SaveValues(System.Double[0:,0:],System.String)">
+            <summary>
+            speichert eine Matrix von Gleitkommazahlen in eine csv-Datei, wobei jeder Wert mit den Koordinaten in eine Zeile geschrieben wird
+            </summary>
+            <param name="matrix">zu speichernde Matrix</param>
+            <param name="filename">Name der Datei</param>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.GetFileNameAndExtension(System.String)">
+            <summary>
+            liefert den Dateinamen ohne führenden Pfad und Endung, sowie die Dateiendung
+            </summary>
+            <param name="url">URL</param>
+            <returns>[Dateiname,Dateiendung]</returns>
+        </member>
+        <member name="M:Glaukopis.Core.Predicates.RemainderOfEuclideanDivision(System.Int32,System.Int32)">
+            <summary>
+            berechnet das mathematische Modulo, im Gegensatz zum symmetrischen durch %
+            </summary>
+            <param name="dividend">Dividend</param>
+            <param name="divisor">Divisor</param>
+            <returns>mathematische Modulo</returns>
+        </member>
+        <member name="T:Glaukopis.Core.ReadOnlyList`1">
+            <summary>
+            Implementierung von <see cref="T:System.Collections.Generic.IReadOnlyList`1"/>
+            </summary>
+            <typeparam name="T">Der Typ der Elemente in der schreibgeschützten Liste.</typeparam>
+        </member>
+        <member name="M:Glaukopis.Core.ReadOnlyList`1.#ctor">
+            <summary>
+            Initialisiert eine neue, leere Instanz von <see cref="T:Glaukopis.Core.ReadOnlyList`1"/>, die über die anfängliche Standardkapazität verfügt.
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Core.ReadOnlyList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initialisiert eine neue Instanz von <see cref="T:Glaukopis.Core.ReadOnlyList`1"/>, die aus der angegebenen Auflistung kopierte Elemente enthält und eine ausreichende Kapazität für die Anzahl der kopierten Elemente aufweist.
+            </summary>
+            <param name="collection">Die Auflistung, deren Elemente in die neue Liste kopiert werden.</param>
+        </member>
+    </members>
+</doc>

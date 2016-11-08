@@ -1,0 +1,930 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Glaukopis.Geometry</name>
+    </assembly>
+    <members>
+        <member name="T:Glaukopis.Geometry.Circle">
+            <summary>
+            Kreis-Klasse
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.#ctor(Glaukopis.Geometry.Coordinate,System.Double)">
+            <summary>
+            erzeugt den Kreis aus dem Mittelpunkt und dem Radius
+            </summary>
+            <param name="center">Mittelpunkt</param>
+            <param name="radius">Radius</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Circle.Center">
+            <summary>
+            Mittelpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Circle.Radius">
+            <summary>
+            Radius
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Circle.Centroid">
+            <summary>
+            Schwerpunkt des Kreises, ist gleich dem Mittelpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Circle.Area">
+            <summary>
+            Flächeninhalt
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft ob der Kreis den Punkt enthält
+            </summary>
+            <param name="coordinate">fraglicher Punkt</param>
+            <returns>true wenn der Punkt in der Fläche liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.Circle)">
+            <summary>
+            prüft ob der Kreis den Kreis enthält
+            </summary>
+            <param name="circle">fraglicher Kreis</param>
+            <returns>true wenn der Kreis im Kreis liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.IPolygon)">
+            <summary>
+            prüft ob der Kreis das Polygon enthält
+            </summary>
+            <param name="polygon">fragliches Polygon</param>
+            <returns>true wenn das Polygon im Kreis liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.Coordinate,System.Boolean)">
+            <summary>
+            prüft ob der Kreis den Punkt enthält
+            </summary>
+            <param name="coordinate">fraglicher Punkt</param>
+            <param name="open">bestimmt das der Rand nicht zum Kreis gehört</param>
+            <returns>true wenn der Punkt im Kreis liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.Circle,System.Boolean)">
+            <summary>
+            prüft ob der Kreis den Kreis enthält
+            </summary>
+            <param name="circle">fraglicher Kreis</param>
+            <param name="open">bestimmt das der Rand nicht zum Kreis gehört</param>
+            <returns>true wenn der Kreis im Kreis liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Circle.Contains(Glaukopis.Geometry.IPolygon,System.Boolean)">
+            <summary>
+            prüft ob der Kreis das Polygon enthält
+            </summary>
+            <param name="polygon">fragliches Polygon</param>
+            <param name="open">bestimmt das der Rand nicht zum Kreis gehört</param>
+            <returns>true wenn das Polygon in der Fläche liegt, false sonst</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.ConcyclicPolygon">
+            <summary>
+            Klasse für Polygone, die einen Umkreis besitzen
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.ConcyclicPolygon.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate})">
+            <summary>
+            erzeugt das Polygon aus der Aufzählung der Ecken des Polygons
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Polygons</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.ConcyclicPolygon.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate},Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt das Polygon aus der Aufzählung der Ecken des Polygons
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Polygons</param>
+            <param name="centroid">Schwerpunkt des Polygons</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.ConcyclicPolygon.Circumcircle">
+            <summary>
+            Umkreis
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.MissingCircumcircleException">
+            <summary>
+            Ausnahme die auftritt wenn kein Umkreis zu dem <see cref="T:Glaukopis.Geometry.ConcyclicPolygon"/> gefunden werden kann
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.Coordinate">
+            <summary>
+            Datentyp für zweidimensionale Koordinaten
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.#ctor(System.Double,System.Double)">
+            <summary>
+            erzeugt eine Koordinate
+            </summary>
+            <param name="x">X-Wert</param>
+            <param name="y">Y-Wert</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Coordinate.X">
+            <summary>
+            X-Wert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Coordinate.Y">
+            <summary>
+            Y-Wert
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.Distance(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert den euklidischen Abstand zu einer <see cref="T:Glaukopis.Geometry.Coordinate"/>
+            </summary>
+            <param name="other">andere Koordinate</param>
+            <returns>euklidischer Abstand</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.Coordinate.Vector">
+            <summary>
+            liefert den Vector, der vom Koordinatenursprung zur Koordinate führt
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.op_Equality(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft auf die Gleichheit zweier Koordinaten 
+            </summary>
+            <param name="a">Koordinate a</param>
+            <param name="b">Koordinate b</param>
+            <returns>true, falls a==b; sonst false</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.op_Inequality(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft auf die Ungleichheit zweier Koordinaten
+            </summary>
+            <param name="a">Koordinate a</param>
+            <param name="b">Koordinate b</param>
+            <returns>true, falls a!=b; sonst false</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.Equals(System.Object)">
+            <summary>
+            prüft auf die Gleichheit zu einem anderen Objekt
+            </summary>
+            <param name="obj">anderes Objekt</param>
+            <returns>true, wenn anderes Objekt eine Koordinate ist und <see cref="M:Glaukopis.Geometry.Coordinate.op_Equality(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)"/></returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.GetHashCode">
+            <summary>
+            liefert den hashcode des Objekts
+            </summary>
+            <returns>hashcode aus dem X- und Y-Wert</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.op_Addition(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            verschiebt die Koordinate um den Vektor
+            </summary>
+            <param name="c">Koordinate</param>
+            <param name="v">Vektor</param>
+            <returns>verschobene Koordinate</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Coordinate.op_Subtraction(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            verschiebt die Koordinate um den invertierten Vektor
+            </summary>
+            <param name="c">Koordinate</param>
+            <param name="v">Vektor</param>
+            <returns>verschobene Koordinate</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.Coordinate.Empty">
+            <summary>
+            unbestimmte Koordinate
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Coordinate.Origin">
+            <summary>
+            Koordinatenursprung
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.CounterclockwiseSorter">
+            <summary>
+            Sortierer für Vektoren (gegen den Uhrzeigersinn in Relation zu einem Referenzvektor)
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.CounterclockwiseSorter.#ctor(Glaukopis.Geometry.Vector,System.Boolean)">
+            <summary>
+            erzeugt den Sortierer
+            </summary>
+            <param name="reference">Referenzvektor gegen den sortiert wird</param>
+            <param name="invertY">Invertierung der Y-Werte (wenn der Koordinatenursprung links oben liegt)</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.CounterclockwiseSorter.Reference">
+            <summary>
+            Referenzvektor gegen den sortiert wird
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.CounterclockwiseSorter.InvertY">
+            <summary>
+            Invertierung der Y-Werte (wenn der Koordinatenursprung links oben liegt)
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.CounterclockwiseSorter.Compare(Glaukopis.Geometry.Vector,Glaukopis.Geometry.Vector)">
+            <summary>
+            vergleicht Vektoren anhand ihrer Richtung, daraus ergibt sich eine Sortierung gegen den Uhrzeigersinn; der Koordinatenursprung ist dabei links oben
+            </summary>
+            <param name="a">Vektor a</param>
+            <param name="b">Vektor b</param>
+            <returns>kleiner als 0 (-1): a liegt mit dem Uhrzeigersinn von b; größer als 0 (1):a liegt gegen den Uhrzeigersinn von b; 0:a und b zeigen in die gleiche Richtung</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.IConcyclicPolygon">
+            <summary>
+            Beschreibung für Polygone die einen Umkreis besitzen
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IConcyclicPolygon.Circumcircle">
+            <summary>
+            Umkreis, verläuft durch alle Eckpunkte
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.IGeometricPrimitive">
+            <summary>
+            Beschreibung für primitive geometrische Formen
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.IGeometricPrimitive.Contains(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft ob der Punkt enthalten ist
+            </summary>
+            <param name="coordinate">Punkt</param>
+            <returns>true wenn enthalten, false sonst</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.IPlanePrimitive">
+            <summary>
+            Beschreibung für zweidimensionale Flächen
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IPlanePrimitive.Centroid">
+            <summary>
+            Schwerpunkt der Fläche
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IPlanePrimitive.Area">
+            <summary>
+            Flächeninhalt
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.IPlanePrimitive.Contains(Glaukopis.Geometry.Circle)">
+            <summary>
+            prüft ob die Fläche den Kreis enthält
+            </summary>
+            <param name="circle">fraglicher Kreis</param>
+            <returns>true wenn der Kreis in der Fläche liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.IPlanePrimitive.Contains(Glaukopis.Geometry.IPolygon)">
+            <summary>
+            prüft ob die Fläche das Polygon enthält
+            </summary>
+            <param name="polygon">fragliches Polygon</param>
+            <returns>true wenn das Polygon in der Fläche liegt, false sonst</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.ILine">
+            <summary>
+            Definition für Geraden und Strecken
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.ILine.A">
+            <summary>
+            beliebiger Punkt auf der Gerade mit <see cref="P:Glaukopis.Geometry.ILine.A"/>!=<see cref="P:Glaukopis.Geometry.ILine.B"/>
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.ILine.B">
+            <summary>
+            beliebiger Punkt auf der Gerade mit <see cref="P:Glaukopis.Geometry.ILine.A"/>!=<see cref="P:Glaukopis.Geometry.ILine.B"/>
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.ILine.Direction">
+            <summary>
+            eine beliebige Richtung der Gerade, üblicherweise von A nach B
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.ILine.LinearEquation">
+            <summary>
+            liefert die Geradengleichung f(x)=mx+n als Tupel (m,n)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.ILine.Angle">
+            <summary>
+            liefert den Winkel der Gerade zur X-Achse; der Bereich liegt zwischen -PI/2 und PI/2, wobei Winkel oberhalb der X-Achse (positives Y) positiv sind 
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.ILine.Perpendicular(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert eine Senkrechte die durch den angegebenen Punkt verläuft
+            </summary>
+            <param name="coordinate">beliebiger Punkt</param>
+            <returns>Senkrechte</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.ILine.Distance(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert den Abstand zwischen der Linie und einem Punkt
+            </summary>
+            <param name="coordinate">Punkt</param>
+            <returns>Abstand</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.IntersectionNotExistingReason">
+            <summary>
+            Aufzählung der Ursachen für das Nichtvorhandenseins eines Schnittpunktes
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Geometry.IntersectionNotExistingReason.LinesAreParallel">
+            <summary>
+            die Geraden oder Strecken verlaufen parallel
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Geometry.IntersectionNotExistingReason.LinesAreIdentical">
+            <summary>
+            die Geraden bzw. die Geraden auf denen die Strecken liegen sind identisch
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Geometry.IntersectionNotExistingReason.IntersectionNotContained">
+            <summary>
+            der Schnittpunkt zwischen den Geraden auf denen die Strecken liegen liegt nicht auf beiden Strecken
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.IPolygon">
+            <summary>
+            Beschreibung für Polygone
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IPolygon.Path">
+            <summary>
+            Auflistung der Eckpunkte
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IPolygon.Edges">
+            <summary>
+            Auflistung der Kanten
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.IPolygon.InteriorAngles">
+            <summary>
+            Auflistung der Innenwinkel
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.Line">
+            <summary>
+            Datentyp für Linien
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            erzeugt eine Linie aus den zwei Stützpunkten und der Richtung
+            </summary>
+            <param name="a">Stützpunkt a</param>
+            <param name="b">Stützpunkt b</param>
+            <param name="direction">Vektor von a nach b</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            erzeugt eine Linie aus einem Stützpunkt und der Richtung
+            </summary>
+            <param name="baseCoordinate">Stützpunkt</param>
+            <param name="direction">Richtung</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt eine Linie aus zwei Stützpunkten
+            </summary>
+            <param name="a">Stützpunkt a</param>
+            <param name="b">Stützpunkt b</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Line.A">
+            <summary>
+            beliebiger Punkt auf der Gerade mit <see cref="P:Glaukopis.Geometry.Line.A"/>!=<see cref="P:Glaukopis.Geometry.Line.B"/>
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Line.B">
+            <summary>
+            beliebiger Punkt auf der Gerade mit <see cref="P:Glaukopis.Geometry.Line.A"/>!=<see cref="P:Glaukopis.Geometry.Line.B"/>
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Line.Direction">
+            <summary>
+            eine beliebige Richtung der Gerade
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Contains(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft ob eine Koordinate auf der Linie liegt
+            </summary>
+            <param name="coordinate">Koordinate</param>
+            <returns>true wenn die Koordinate auf der Linie liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Perpendicular(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert eine Senkrechte die durch den angegebenen Punkt verläuft
+            </summary>
+            <param name="coordinate">beliebiger Punkt</param>
+            <returns>Senkrechte</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Translate(Glaukopis.Geometry.Vector)">
+            <summary>
+            liefert die um den Vektor verschobenen Gerade
+            </summary>
+            <param name="vector">Vektor der die Translation bestimmt</param>
+            <returns>verschobenen Gerade</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Intersection(Glaukopis.Geometry.Line)">
+            <summary>
+            liefert den Schnittpunkt mit einer Gerade, sofern existent
+            </summary>
+            <param name="other">fragliche Gerade</param>
+            <returns>Schnittpunkt, oder null wenn nicht existent</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Intersection(Glaukopis.Geometry.Line,System.Nullable{Glaukopis.Geometry.IntersectionNotExistingReason}@)">
+            <summary>
+            liefert den Schnittpunkt mit einer Gerade, sofern existent
+            </summary>
+            <param name="other">fragliche Gerade</param>
+            <param name="intersectionNotExistingReason">Grund für das Nichtvorhandensein</param>
+            <returns>Schnittpunkt, oder null wenn nicht existent</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.intersectionA(Glaukopis.Geometry.Line,Glaukopis.Geometry.Line)">
+            <summary>
+            http://matheplanet.com/default3.html?call=/viewtopic.php?topic=108916
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.intersectionB(Glaukopis.Geometry.Line,Glaukopis.Geometry.Line)">
+            <summary>
+            http://matheplanet.com/default3.html?call=/viewtopic.php?topic=108916
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Line.LinearEquation">
+             <summary>
+             liefert die Geradengleichung f(x)=mx+n als Tupel (m,n)
+             </summary>
+            <remarks>@author Daniel Heim</remarks>
+        </member>
+        <member name="M:Glaukopis.Geometry.Line.Distance(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert den Abstand zwischen der Linie und einem Punkt
+            </summary>
+            <param name="coordinate">Punkt</param>
+            <returns>Abstand</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.Line.Angle">
+            <summary>
+            liefert den Winkel der Linie zur X-Achse; der Bereich liegt zwischen -PI/2 und PI/2, wobei Winkel oberhalb der X-Achse (positives Y) positiv sind 
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.LineSegment">
+            <summary>
+            Datentyp für Strecken
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            erzeugt eine Strecke aus den zwei Punkten und der Richtung
+            </summary>
+            <param name="a">Punkt a</param>
+            <param name="b">Punkt b</param>
+            <param name="direction">Vektor von a nach b</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt eine Strecke zwischen zwei Punkten
+            </summary>
+            <param name="a">Punkt a</param>
+            <param name="b">Punkt b</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Vector)">
+            <summary>
+            erzeugt eine Strecke aus einem Startpunkt und einem Vektor der Richtung und Länge bestimmt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="direction">Richtung und Länge</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.A">
+            <summary>
+            Startpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.B">
+            <summary>
+            Endpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.Direction">
+            <summary>
+            Vektor von A nach B
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.Center">
+            <summary>
+            Mittelpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.PerpendicularBisector">
+            <summary>
+            Streckensymmetrale
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Contains(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft ob ein Punkt auf der Strecke liegt
+            </summary>
+            <param name="coordinate">Punkt</param>
+            <returns>true wenn der Punkt auf der Strecke liegt, false sonst</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.Angle">
+            <summary>
+            liefert den Winkel der Gerade zur X-Achse; der Bereich liegt zwischen -PI/2 und PI/2, wobei Winkel oberhalb der X-Achse (positives Y) positiv sind 
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Perpendicular(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert eine Senkrechte die durch den angegebenen Punkt verläuft
+            </summary>
+            <param name="coordinate">beliebiger Punkt</param>
+            <returns>Senkrechte</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Translate(Glaukopis.Geometry.Vector)">
+            <summary>
+            liefert die um den Vektor verschobene Strecke
+            </summary>
+            <param name="vector">Vektor der die Translation bestimmt</param>
+            <returns>verschobene Strecke</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Distance(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert den Abstand zwischen der Strecke und einem Punkt
+            </summary>
+            <param name="coordinate">Punkt</param>
+            <returns>Abstand</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Intersection(Glaukopis.Geometry.LineSegment)">
+            <summary>
+            liefert den Schnittpunkt mit einer Strecke, sofern existent
+            </summary>
+            <param name="other">fragliche Strecke</param>
+            <returns>Schnittpunkt, oder null wenn nicht existent</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.LineSegment.Intersection(Glaukopis.Geometry.LineSegment,System.Nullable{Glaukopis.Geometry.IntersectionNotExistingReason}@)">
+            <summary>
+            liefert den Schnittpunkt mit einer Strecke, sofern existent
+            </summary>
+            <param name="other">fragliche Strecke</param>
+            <param name="intersectionNotExistingReason">Grund für das Nichtvorhandensein</param>
+            <returns>Schnittpunkt, oder null wenn nicht existent</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.LinearEquation">
+            <summary>
+            liefert die Geradengleichung f(x)=mx+n als Tupel (m,n)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.Line">
+            <summary>
+            liefert die Gerade auf der die Strecke liegt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.LineSegment.Length">
+            <summary>
+            liefert die Länge der Strecke
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.Polygon">
+            <summary>
+            Polygon-Klasse
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Polygon.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate})">
+            <summary>
+            erzeugt das Polygon aus der Aufzählung der Ecken des Polygons
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Polygons</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Polygon.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate},Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt das Polygon aus der Aufzählung der Ecken des Polygons
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Polygons</param>
+            <param name="centroid">Schwerpunkt des Polygons</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.Path">
+            <summary>
+            Aufzählung der Polygonecken
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.Edges">
+            <summary>
+            Aufzählung der Polygonkanten; Path[0]->Path[1],...,Path[n]->Path[0]
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.Centroid">
+            <summary>
+            Schwerpunkt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.Area">
+            <summary>
+            Flächeninhalt
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.InteriorAngles">
+            <summary>
+            Auflistung der Innenwinkel
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.LargestAngle">
+            <summary>
+            liefert den größten Innenwinkel in rad
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.SmallestAngle">
+            <summary>
+            liefert den kleinsten Innenwinkel in rad
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Polygon.Circumcircle">
+            <summary>
+            Umkreis, sofern vorhanden
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Geometry.Polygon.CircumcircleTolerance">
+            <summary>
+            legt den maximalen Abstand zwischen Schnittpunkten der Senkrechten der Seiten fest, der noch als gemeinsamer Schnittpunkt gelten soll
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Polygon.Contains(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            prüft ob das Polygon den Punkt enthält
+            </summary>
+            <param name="coordinate">fraglicher Punkt</param>
+            <returns>true wenn der Punkt in der Fläche liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Polygon.Contains(Glaukopis.Geometry.Circle)">
+            <summary>
+            prüft ob das Polygon den Kreis enthält
+            </summary>
+            <param name="circle">fraglicher Kreis</param>
+            <returns>true wenn der Kreis im Kreis liegt, false sonst</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Polygon.Contains(Glaukopis.Geometry.IPolygon)">
+            <summary>
+            prüft ob das Polygon das Polygon enthält
+            </summary>
+            <param name="polygon">fragliches Polygon</param>
+            <returns>true wenn das Polygon im Polygon liegt, false sonst</returns>
+        </member>
+        <member name="T:Glaukopis.Geometry.Predicates">
+            <summary>
+            Utility-Klasse für Prädikate
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.EuclideanDistance(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            liefert den euklidischen Abstand zwischen zwei Koordinaten
+            </summary>
+            <param name="a">Koordinate a</param>
+            <param name="b">Koordinate b</param>
+            <returns>euklidischer Abstand</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.T(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            Prädikat zur Bestimmung der Lage eines Punktes zu einer Strecke
+            http://de.wikipedia.org/wiki/Graham_Scan
+            </summary>
+            <param name="a">Startpunkt der Strecke</param>
+            <param name="b">Endpunkt der Strecke</param>
+            <param name="c">zu prüfender Punkt</param>
+            <returns>kleiner 0: c liegt rechts von a->b, gleich 0: c liegt auf a->b, größer 0: c liegt links von a->b</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.T(Glaukopis.Geometry.LineSegment,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            Prädikat zur Bestimmung der Lage eines Punktes zu einer Strecke
+            http://de.wikipedia.org/wiki/Graham_Scan
+            </summary>
+            <param name="lineSegment">Strecke</param>
+            <param name="c">zu prüfender Punkt</param>
+            <returns>kleiner 0: c liegt rechts von lineSegment, gleich 0: c liegt auf lineSegment, größer 0: c liegt links von lineSegment</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.CalculateLineAngleDifference(System.Double,System.Double)">
+            <summary>
+            berechnet die Differenz zwischen zwei Winkeln die wiederum Werte zwischen Pi/2 und -Pi/2 annehmen
+            </summary>
+            <param name="a">Winkel a</param>
+            <param name="b">Winkel b</param>
+            <returns>Differenz, maximal Pi/2</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.RadToDegrees(System.Double)">
+            <summary>
+            wandelt rad-Winkelwerte(Vollkreis: 2Pi) in Grad-Winkelwerte(Vollkreis: 360°)
+            </summary>
+            <param name="radians">rad-Winkelwert</param>
+            <returns>Grad-Winkelwert</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.DegreesToRad(System.Double)">
+            <summary>
+            wandelt Grad-Winkelwerte(Vollkreis: 360°) in rad-Winkelwerte(Vollkreis: 2Pi)
+            </summary>
+            <param name="degrees">Grad-Winkelwert</param>
+            <returns>rad-Winkelwert</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.SolveLinearEquationForX(System.Tuple{System.Double,System.Double},System.Double)">
+             <summary>
+             löst die Geradengleichung nach x auf 
+             </summary>
+             <param name="linearEquation">Geradengleichung</param>
+             <param name="y">Y-Wert eines Punktes auf der Geraden</param>
+             <returns>X-Wert des Punktes auf der Geraden</returns>
+            <remarks>@author Daniel Heim</remarks>
+        </member>
+        <member name="M:Glaukopis.Geometry.Predicates.SolveLinearEquationForY(System.Tuple{System.Double,System.Double},System.Double)">
+             <summary>
+             löst die Geradengleichung nach y auf 
+             </summary>
+             <param name="linearEquation">Geradengleichung</param>
+             <param name="x">X-Wert eines Punktes auf der Geraden</param>
+             <returns>Y-Wert des Punktes auf der Geraden</returns>
+            <remarks>@author Daniel Heim</remarks>
+        </member>
+        <member name="T:Glaukopis.Geometry.RotationMatrix">
+            <summary>
+            Datentyp für die Drehmatrix
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.RotationMatrix.#ctor(System.Double)">
+            <summary>
+            erzeugt die Drehmatrix zu einem Winkel
+            </summary>
+            <param name="angle">ein im Bogenmaß angegebener Winkel</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.RotationMatrix.UpperLeft">
+            <summary>
+            cos(angle)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.RotationMatrix.UpperRight">
+            <summary>
+            -sin(angle)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.RotationMatrix.LowerLeft">
+            <summary>
+            sin(angle)
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.RotationMatrix.LowerRight">
+            <summary>
+            cos(angle)
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.Triangle">
+            <summary>
+            Dreiecksklasse
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Triangle.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate})">
+            <summary>
+            erzeugt das Dreieck aus den drei Ecken
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Dreiecks</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Triangle.#ctor(System.Collections.Generic.IEnumerable{Glaukopis.Geometry.Coordinate},Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt das Dreieck aus den drei Ecken
+            </summary>
+            <param name="path">aufeinanderfolgende Ecken des Dreiecks</param>
+            <param name="centroid">Schwerpunkt des Dreiecks</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Triangle.Equilateralness">
+            <summary>
+            Gleichseitigkeit des Dreiecks; 
+            liefert die relative Höhe über der längsten Seite;
+            ist für gleichseitige Dreiecke 1, für colineare 0
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Triangle.Bias">
+            <summary>
+            liefert die Schiefe des Dreiecks;
+            gemessen wird die Abweichung des 3. Punktes über der längsten Seite zu einem gleichschenkeligen Dreieck;
+            0 für gleichschenkliche Dreieck mit einer längeren 3. Seite, ansonsten immer kleiner 1
+            </summary>
+        </member>
+        <member name="T:Glaukopis.Geometry.Vector">
+            <summary>
+            Datentyp für Vektoren
+            </summary>
+        </member>
+        <member name="F:Glaukopis.Geometry.Vector.coordinate">
+            <summary>
+            Daten des Vektors in Koordinatenform
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.#ctor(Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt einen Vektor vom Ursprung zur Koordinate
+            </summary>
+            <param name="coordinate">Endpunkt-Koordinate</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.#ctor(System.Double,System.Double)">
+            <summary>
+            erzeugt einen Vektor
+            </summary>
+            <param name="x">X-Wert</param>
+            <param name="y">Y-Wert</param>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.#ctor(Glaukopis.Geometry.Coordinate,Glaukopis.Geometry.Coordinate)">
+            <summary>
+            erzeugt einen Vektor von a nach b
+            </summary>
+            <param name="a">Startpunkt des Vektors</param>
+            <param name="b">Endpunkt des Vektors</param>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.X">
+            <summary>
+            X-Wert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Y">
+            <summary>
+            Y-Wert
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Length">
+            <summary>
+            Länge des Vektors
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Normalized">
+            <summary>
+            liefert den normalisierten Vektor; hat die Länge 1
+            </summary>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Perpendicular">
+            <summary>
+            liefert einen senkrechten Vector
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.Rotate(System.Double)">
+            <summary>
+            dreht einen Vektor
+            </summary>
+            <param name="angle">ein im Bogenmaß angegebener Winkel</param>
+            <returns>gedrehter Vektor</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.Rotate(Glaukopis.Geometry.RotationMatrix)">
+            <summary>
+            dreht einen Vektor
+            </summary>
+            <param name="rotationMatrix">Rotationsmatrix</param>
+            <returns>gedrehter Vektor</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.op_Multiply(Glaukopis.Geometry.Vector,System.Double)">
+            <summary>
+            Skaliert einen Vektor
+            </summary>
+            <param name="vector">Vektor</param>
+            <param name="scalar">Skalar</param>
+            <returns>skalierter Vektor</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.op_Division(Glaukopis.Geometry.Vector,System.Double)">
+            <summary>
+            Skaliert einen Vektor mit dem Reziproken
+            </summary>
+            <param name="vector">Vektor</param>
+            <param name="scalar">Skalar</param>
+            <returns>skalierter Vektor</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.op_UnaryNegation(Glaukopis.Geometry.Vector)">
+            <summary>
+            invertiert einen Vektor
+            </summary>
+            <param name="vector">Vektor</param>
+            <returns>invertierter Vektor</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Empty">
+            <summary>
+            liefert den leeren Vektor
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.DotProduct(Glaukopis.Geometry.Vector)">
+            <summary>
+            berechnet das Skalarprodukt
+            </summary>
+            <param name="other">Vektor</param>
+            <returns>Skalarprodukt</returns>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.CrossProduct(Glaukopis.Geometry.Vector)">
+            <summary>
+            berechnet das Kreuzprodukt
+            </summary>
+            <param name="other">Vektor</param>
+            <returns>Kreuzprodukt</returns>
+        </member>
+        <member name="P:Glaukopis.Geometry.Vector.Coordinate">
+            <summary>
+            liefert den Vektor (genauer dessen Endpunkt) als Koordinate
+            </summary>
+        </member>
+        <member name="M:Glaukopis.Geometry.Vector.AngleBetween(Glaukopis.Geometry.Vector)">
+            <summary>
+            liefert den kleineren Winkel zwischen den Vektoren in rad; ist negativ wenn der kleinere Winkel im Uhrzeigersinn von diesem Vektor liegt
+            </summary>
+            <param name="other">Vektor</param>
+            <returns>Winkel zwischen den Vektoren</returns>
+        </member>
+    </members>
+</doc>
