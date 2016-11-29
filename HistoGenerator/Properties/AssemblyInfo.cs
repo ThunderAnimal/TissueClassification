@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HistoGenerator")]
+[assembly: AssemblyTitle("AnnotationExtractor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HistoGenerator")]
+[assembly: AssemblyProduct("AnnotationExtractor")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fa9e67b3-3438-4e11-9060-edd9f288499c")]
+[assembly: Guid("57850c06-59ef-4bb6-a1f0-c5371e7f5d1c")]
 
 // Version information for an assembly consists of the following four values:
 //

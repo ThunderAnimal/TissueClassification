@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileProcessor", "TileProces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TissueDetection", "TissueDetection\TissueDetection.csproj", "{C9ACB993-28BB-4F6B-97C4-BC633662FD94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoGenerator", "HistoGenerator\HistoGenerator.csproj", "{3C5D3F02-43AB-465F-8D19-3F3A679B5516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C9ACB993-28BB-4F6B-97C4-BC633662FD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9ACB993-28BB-4F6B-97C4-BC633662FD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9ACB993-28BB-4F6B-97C4-BC633662FD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5D3F02-43AB-465F-8D19-3F3A679B5516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5D3F02-43AB-465F-8D19-3F3A679B5516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5D3F02-43AB-465F-8D19-3F3A679B5516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5D3F02-43AB-465F-8D19-3F3A679B5516}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

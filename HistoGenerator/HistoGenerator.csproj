@@ -4,29 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FA9E67B3-3438-4E11-9060-EDD9F288499C}</ProjectGuid>
+    <ProjectGuid>{3C5D3F02-43AB-465F-8D19-3F3A679B5516}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HistoGenerator</RootNamespace>
     <AssemblyName>HistoGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,48 +33,54 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="#Accessory">
+    <Reference Include="#Accessory, Version=1.12.5977.22874, Culture=neutral, PublicKeyToken=c4127a1b1461b9bc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\#Accessory.dll</HintPath>
     </Reference>
-    <Reference Include="#Accessory.CognitionMaster">
+    <Reference Include="#Accessory.CognitionMaster, Version=1.12.5977.22877, Culture=neutral, PublicKeyToken=d019e2d24b1566c0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\#Accessory.CognitionMaster.exe</HintPath>
     </Reference>
-    <Reference Include="#Accessory.CognitionMaster.WholeSlideImageSupport">
+    <Reference Include="#Accessory.CognitionMaster.WholeSlideImageSupport, Version=1.12.5977.23128, Culture=neutral, PublicKeyToken=730b5e130170c06c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\#Accessory.CognitionMaster.WholeSlideImageSupport.dll</HintPath>
     </Reference>
-    <Reference Include="#Accessory.Imaging">
+    <Reference Include="#Accessory.Imaging, Version=1.12.5977.22876, Culture=neutral, PublicKeyToken=5d70c212ddb9f47e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\#Accessory.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="Glaukopis.CognitionMasterIntegration">
       <HintPath>..\dlls\Glaukopis.CognitionMasterIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Glaukopis.Core">
+    <Reference Include="Glaukopis.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\Glaukopis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Glaukopis.DiscreteGeometry">
+    <Reference Include="Glaukopis.DiscreteGeometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\Glaukopis.DiscreteGeometry.dll</HintPath>
     </Reference>
-    <Reference Include="Glaukopis.Geometry">
+    <Reference Include="Glaukopis.Geometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\Glaukopis.Geometry.dll</HintPath>
     </Reference>
-    <Reference Include="Glaukopis.SharpAccessoryIntegration">
+    <Reference Include="Glaukopis.SharpAccessoryIntegration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\Glaukopis.SharpAccessoryIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Glaukopis.SlideProcessing">
+    <Reference Include="Glaukopis.SlideProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\Glaukopis.SlideProcessing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="VMscope.InteropCore">
+    <Reference Include="System.Drawing" />
+    <Reference Include="VMscope.InteropCore, Version=4.0.5700.11982, Culture=neutral, PublicKeyToken=3c30ce52959764dc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\VMscope.InteropCore.DLL</HintPath>
     </Reference>
-    <Reference Include="VMscope.VirtualSlideAccess">
+    <Reference Include="VMscope.VirtualSlideAccess, Version=4.0.5700.12317, Culture=neutral, PublicKeyToken=7bcee14bf0bd218b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\VMscope.VirtualSlideAccess.DLL</HintPath>
     </Reference>
   </ItemGroup>
@@ -101,18 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,38 +6,70 @@ using System.Threading.Tasks;
 
 namespace HistoGenerator
 {
-    class TissueClass
+    class TissueClass: IComparable<TissueClass>
     {
-        private String annotaionName;
+        private String slideName;
+        private String annotaionClass;
+        private int annotaionId;
                 
-        public int MeanH { get; set; }
-        public int Q25H { get; set; }
-        public int Q75H { get; set; }
-        public int MeanE { get; set; }
-        public int Q25E { get; set; }
-        public int Q75E { get; set; }
+        public uint MeanH { get; set; }
+        public uint Q25H { get; set; }
+        public uint Q75H { get; set; }
+        public uint MeanE { get; set; }
+        public uint Q25E { get; set; }
+        public uint Q75E { get; set; }
 
-
-        public TissueClass(){}
-        public TissueClass(String annotaionName)
+        public TissueClass(int annotaionId, String annotaionClass, String slideName)
         {
-            this.annotaionName = annotaionName;
-        } 
+            this.slideName = slideName;
+            this.annotaionId = annotaionId;
+            this.annotaionClass = annotaionClass;
+        }
 
-        public void setAnnotaionName(String annotaionName)
+        public String getSlideName()
         {
-            this.annotaionName = annotaionName;
+            return this.slideName;
+        }
+        public int getAnnotaionId()
+        {
+            return this.annotaionId;
+        }
+        public String getAnnotaionClass()
+        {
+            return this.annotaionClass;
+        }
+        public void setAnnotaionClassOther()
+        {
+            this.annotaionClass = "other";
         }
         public override string ToString()
         {
-            return string.Format("{0},{1},{2},{3},{4},{5},{6}",
-                this.annotaionName,
+            return string.Format("{0}.{1}.{2}", this.annotaionClass, this.slideName, this.annotaionId);
+        }
+        public string getCsvFormat()
+        {
+            return string.Format("{0};{1};{2};{3};{4};{5};{6}",
+                this.annotaionClass,
                 this.Q25H,
                 this.MeanH,
                 this.Q75H,
                 this.Q25E,
                 this.MeanE,
                 this.Q75E);
+        }
+
+        public int CompareTo(TissueClass other)
+        {
+            // A null value means that this object is greater.
+            if (other == null)
+                return 1;
+
+            else
+                return this.annotaionClass.CompareTo(other.annotaionClass);
+        }
+        public TissueClass Clone()
+        {
+            return (TissueClass)this.MemberwiseClone();
         }
     }
 }
