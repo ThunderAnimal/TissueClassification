@@ -7,6 +7,7 @@ using SharpAccessory.Imaging.Filters;
 using System.IO;
 using VMscope.InteropCore.VirtualMicroscopy;
 using System.Collections.Generic;
+using SharpAccessory.Threading;
 
 namespace HistoGenerator
 {
@@ -20,23 +21,41 @@ namespace HistoGenerator
 
         private static void Main(string[] args)
         {
+            //Eingabe Parameter
             String srcSlides = args[0];
             String outCsv = args[1];
             String outputPics = args[2];
 
+            //Nötige Ordner ertsellen 
             if (!Directory.Exists(outputPics))
-            {
                 Directory.CreateDirectory(outputPics);
-            }
+            if (!Directory.Exists(outCsv))
+                Directory.CreateDirectory(outCsv);
 
+            //Annotaionen und Histowerte holen und in liste sammeln 
             TissueAnnotaionList annotationList;
             annotationList = getAnnotaions(srcSlides, outputPics);
-            annotationList.sort();
 
+            //Liste anpassen
+            annotationList.sort();
+            annotationList.cleanUp();
+
+            //Ergebnisse in CSV schreiben
+            Console.WriteLine("Results saved to:  {0} ", outCsv);
             annotationList.writeToCsv(outCsv + @"\data.csv");
             annotationList.groubByOnClassAndOthers("Fett").writeToCsv(outCsv + @"\dataFett.csv");
-            annotationList.groubByOnClassAndOthers("Tumor").writeToCsv(outCsv + @"\dataTumor.csv"); 
+            annotationList.groubByOnClassAndOthers("Fettgewebe").writeToCsv(outCsv + @"\dataFettgeweebe.csv");
+            annotationList.groubByOnClassAndOthers("Tumor").writeToCsv(outCsv + @"\dataTumor.csv");
+            annotationList.groubByOnClassAndOthers("Entzündung").writeToCsv(outCsv + @"\dataEntzuendung.csv");
+            annotationList.groubByOnClassAndOthers("Gefäß").writeToCsv(outCsv + @"\dataGefaess.csv");
+            annotationList.groubByOnClassAndOthers("Mikrokalk").writeToCsv(outCsv + @"\dataMikrokalk.csv");
+            annotationList.groubByOnClassAndOthers("Nerv").writeToCsv(outCsv + @"\dataNerv.csv");
+            annotationList.groubByOnClassAndOthers("Stroma").writeToCsv(outCsv + @"\dataStroma.csv");
+            annotationList.groubByOnClassAndOthers("DCIC").writeToCsv(outCsv + @"\dataDCIC.csv");
+            annotationList.groubByOnClassAndOthers("Kalk").writeToCsv(outCsv + @"\dataKalk.csv");
+            annotationList.groubByOnClassAndOthers("Normales Mammaepithel").writeToCsv(outCsv + @"\dataNormalesMammaepithel.csv");
 
+            //FINISH
             Console.WriteLine("\n############ FINISHED ###############");
             Console.ReadKey();
         }
@@ -51,16 +70,16 @@ namespace HistoGenerator
                 using (var slideCache = new SlideCache(slideName))
                 {
                     int i = 0;
-                    foreach (var annotation in slideCache.Slide.GetAnnotations())
+                    Parallel.ForEach(slideCache.Slide.GetAnnotations(), (annotation) =>
                     {
-                        if(abort != 0)
+                        if (abort != 0)
                         {
                             if (i >= abort)
-                                break;
+                                return;
 
                             i++;
                         }
-                       
+
                         //Annotaions Bitmap extrahieren
                         var contained = new List<IAnnotation>();
                         foreach (var candidate in slideCache.Slide.GetAnnotations())
@@ -75,7 +94,7 @@ namespace HistoGenerator
                         using (Bitmap annotationBitmap = annotation.Extract(1, contained), hImage = annotationBitmap.Clone() as Bitmap, eImage = annotationBitmap.Clone() as Bitmap)
                         {
 
-                            TissueClass tissueAnnotation = new TissueClass(annotation.Id, annotation.Name, slideCache.SlideName);
+                            TissueAnnotationClass tissueAnnotation = new TissueAnnotationClass(annotation.Id, annotation.Name, slideCache.SlideName);
 
                             //H und E Werte ermitteln
                             var gpH = new ColorDeconvolution().Get1stStain(hImage, ColorDeconvolution.KnownStain.HaematoxylinEosin);
@@ -111,7 +130,11 @@ namespace HistoGenerator
 
                             Console.WriteLine(tissueAnnotation + " exc:" + contained.Count);
                         }
-                    }
+                    });
+                    /*foreach (var annotation in slideCache.Slide.GetAnnotations())
+                    {
+                       
+                    }*/
                 }
             }
             return annotationList;

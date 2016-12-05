@@ -87,8 +87,8 @@
   <ItemGroup>
     <Compile Include="HistoGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TissueClass.cs" />
-    <Compile Include="TissueClassList.cs" />
+    <Compile Include="TissueAnnotationClass.cs" />
+    <Compile Include="TissueAnnotationList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

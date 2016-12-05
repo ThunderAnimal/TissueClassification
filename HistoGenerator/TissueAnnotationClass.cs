@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HistoGenerator
 {
-    class TissueClass: IComparable<TissueClass>
+    class TissueAnnotationClass: IComparable<TissueAnnotationClass>
     {
         private String slideName;
         private String annotaionClass;
@@ -19,7 +19,7 @@ namespace HistoGenerator
         public uint Q25E { get; set; }
         public uint Q75E { get; set; }
 
-        public TissueClass(int annotaionId, String annotaionClass, String slideName)
+        public TissueAnnotationClass(int annotaionId, String annotaionClass, String slideName)
         {
             this.slideName = slideName;
             this.annotaionId = annotaionId;
@@ -58,7 +58,7 @@ namespace HistoGenerator
                 this.Q75E);
         }
 
-        public int CompareTo(TissueClass other)
+        public int CompareTo(TissueAnnotationClass other)
         {
             // A null value means that this object is greater.
             if (other == null)
@@ -67,9 +67,9 @@ namespace HistoGenerator
             else
                 return this.annotaionClass.CompareTo(other.annotaionClass);
         }
-        public TissueClass Clone()
+        public TissueAnnotationClass Clone()
         {
-            return (TissueClass)this.MemberwiseClone();
+            return (TissueAnnotationClass)this.MemberwiseClone();
         }
     }
 }

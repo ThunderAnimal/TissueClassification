@@ -9,18 +9,18 @@ namespace HistoGenerator
 {
     class TissueAnnotaionList
     {
-        List<TissueClass> tissueList;
+        List<TissueAnnotationClass> tissueList;
 
         public TissueAnnotaionList()
         {
-            this.tissueList = new List<TissueClass>();
+            this.tissueList = new List<TissueAnnotationClass>();
         }
         
-        public void add(TissueClass annotaion)
+        public void add(TissueAnnotationClass annotaion)
         {
             this.tissueList.Add(annotaion);
         }
-        public TissueClass getElement(int index)
+        public TissueAnnotationClass getElement(int index)
         {
             return this.tissueList.ElementAt(index);
         }
@@ -28,12 +28,28 @@ namespace HistoGenerator
         {
             tissueList.Sort();
         }
+        public void cleanUp()
+        {
+            List<TissueAnnotationClass> toDelete = new List<TissueAnnotationClass>();
+            foreach(TissueAnnotationClass annotation in this.tissueList)
+            {
+                if(annotation.getAnnotaionClass().Equals("") ||
+                    annotation.getAnnotaionClass().Equals("."))
+                {
+                    toDelete.Add(annotation);
+                }
+            }
+            foreach (TissueAnnotationClass annotation in toDelete)
+            {
+                this.tissueList.Remove(annotation);
+            }
+        }
         public TissueAnnotaionList groubByOnClassAndOthers(String ClassName)
         {
             TissueAnnotaionList newList = new TissueAnnotaionList();
-            foreach(TissueClass annotaion in this.tissueList)
+            foreach(TissueAnnotationClass annotaion in this.tissueList)
             {
-                TissueClass newAnnotaion = annotaion.Clone();
+                TissueAnnotationClass newAnnotaion = annotaion.Clone();
                 if (!newAnnotaion.getAnnotaionClass().Equals(ClassName))
                 {
                     newAnnotaion.setAnnotaionClassOther();
@@ -44,11 +60,11 @@ namespace HistoGenerator
             return newList;
         }
 
-        public void writeToCsv(String path)
+        public void writeToCsv(string path)
         {
 
             File.WriteAllText(path,"Class;H-Q25;H-Median;H-Q75;E-Q25;E-Median;E-Q75\n",System.Text.Encoding.UTF8);
-            foreach(TissueClass annotaion in tissueList)
+            foreach(TissueAnnotationClass annotaion in tissueList)
             {
                 File.AppendAllText(path,annotaion.getCsvFormat() + "\n");
             }
