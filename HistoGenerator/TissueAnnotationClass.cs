@@ -48,7 +48,7 @@ namespace HistoGenerator
         }
         public string getCsvFormat()
         {
-            return string.Format("{0};{1};{2};{3};{4};{5};{6}",
+            return string.Format("{0},{1},{2},{3},{4},{5},{6}",
                 this.annotaionClass,
                 this.Q25H,
                 this.MeanH,
