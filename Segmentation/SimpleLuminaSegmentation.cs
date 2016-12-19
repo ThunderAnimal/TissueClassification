@@ -2,10 +2,11 @@
  * @author Sebastian Lohmann
  */
 namespace Glaukopis.SharpAccessoryIntegration.Segmentation {
-	using System.Drawing;
-	using SharpAccessory.Imaging.Processors;
-	using SharpAccessory.Imaging.Segmentation;
-	public class SimpleLuminaSegmentation{
+    using System.Drawing;
+    using SharpAccessory.Imaging.Processors;
+    using SharpAccessory.Imaging.Segmentation;
+
+    public class SimpleLuminaSegmentation{
 		public ObjectLayer Execute(Bitmap image) {
 			var m=new Map(image.Width,image.Height);
 			using(var gp=new GrayscaleProcessor(image.Clone() as Bitmap,RgbToGrayscaleConversion.Mean))

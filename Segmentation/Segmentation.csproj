@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellCoresHE.cs" />
+    <Compile Include="ImageObjectLumina.cs" />
     <Compile Include="LuminaSegmentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SegmentationPlugin.cs" />
