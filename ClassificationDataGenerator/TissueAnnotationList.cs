@@ -63,12 +63,51 @@ namespace HistoGenerator
         public void writeToCsv(string path)
         {
 
-            File.WriteAllText(path, TissueAnnotationClass.getCsvHeadForamt() + "\n", System.Text.Encoding.UTF8);
+            File.WriteAllText(path, this.getCsvHeadForamt() + "\n", System.Text.Encoding.UTF8);
             foreach(TissueAnnotationClass annotaion in tissueList)
             {
                 File.AppendAllText(path,annotaion.getCsvFormat() + "\n");
             }
         }
-        
+        private string getCsvHeadForamt()
+        {
+            return
+                string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33}",
+                    "Class",
+                    "H - Q25",
+                    "H - Median",
+                    "H - Q75",
+                    "E - Q25",
+                    "E - Median",
+                    "E - Q75",
+                    "CountCores",
+                    "CountLumina",
+                    "MidCoresSize",
+                    "MeanCoresSize",
+                    "Q25CoresSize",
+                    "Q75CoresSize",
+                    "MidLuminaSize",
+                    "MeanLuminaSize",
+                    "Q25LuminaSize",
+                    "Q75LuminaSize",
+                    "DensityCores",
+                    "MidFormFactorCores",
+                    "MeanFormFactorCores",
+                    "Q25FormFactorCores",
+                    "Q75FormFactorCores",
+                    "MidFormFactorLuminaWithSize",
+                    "MeanFormFactorLuminaWithSize",
+                    "Q25FormFactorLuminaWithSize",
+                    "Q75FormFactorLuminaWithSize",
+                    "MidDensityLuminaCoresInNear",
+                    "MeanDensityLuminaCoresInNear",
+                    "Q25DensityLuminaCoresInNear",
+                    "Q75DensityLuminaCoresInNear",
+                    "MidDensityFormFactorLuminaCoresInNear",
+                    "MeanDensityFormFactorLuminaCoresInNear",
+                    "Q25DensityFormFactorLuminaCoresInNear",
+                    "Q75DensityFormFactorLuminaCoresInNear");
+        }
+
     }
 }

@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileProcessor", "TileProces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TissueDetection", "TissueDetection\TissueDetection.csproj", "{C9ACB993-28BB-4F6B-97C4-BC633662FD94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassificationDataGenerator", "HistoGenerator\ClassificationDataGenerator.csproj", "{3C5D3F02-43AB-465F-8D19-3F3A679B5516}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassificationDataGenerator", "ClassificationDataGenerator\ClassificationDataGenerator.csproj", "{3C5D3F02-43AB-465F-8D19-3F3A679B5516}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segmentation", "Segmentation\Segmentation.csproj", "{56A82354-C8DD-493F-80B3-20742D92906D}"
 EndProject

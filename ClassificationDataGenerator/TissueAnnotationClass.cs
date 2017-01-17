@@ -35,6 +35,10 @@ namespace HistoGenerator
         public uint MeanFormFactorCores { get; set; }
         public uint Q25FormFactorCores { get; set; }
         public uint Q75FormFactorCores { get; set; }
+        public uint MidFormFactorLuminaWithSize { get; set; } //Durschnittlier Formfactor des Luminas in Betrachtung der Groese --> MID(Range/ 2* FormFaktor)
+        public uint MeanFormFactorLuminaWithSize { get; set; } 
+        public uint Q25FormFactorLuminaWithSize { get; set; } 
+        public uint Q75FormFactorLuminaWithSize { get; set; } 
         public uint MidDensityLuminaCoresInNear { get; set; } //Durchshcnitt der Dichte der Zellkerne in der Nähe vom Lumina --> Mid(Range/CoresInNear)
         public uint MeanDensityLuminaCoresInNear { get; set; } 
         public uint Q25DensityLuminaCoresInNear { get; set; } 
@@ -73,7 +77,7 @@ namespace HistoGenerator
         }
         public string getCsvFormat()
         {
-            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29}",
+            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33}",
                 this.annotaionClass,
                 this.Q25H,
                 this.MeanH,
@@ -96,6 +100,10 @@ namespace HistoGenerator
                 this.MeanFormFactorCores,
                 this.Q25FormFactorCores,
                 this.Q75FormFactorCores,
+                this.MidFormFactorLuminaWithSize,
+                this.MeanFormFactorLuminaWithSize,
+                this.Q25FormFactorLuminaWithSize,
+                this.Q75FormFactorLuminaWithSize,
                 this.MidDensityLuminaCoresInNear,
                 this.MeanDensityLuminaCoresInNear,
                 this.Q25DensityLuminaCoresInNear,
@@ -104,42 +112,6 @@ namespace HistoGenerator
                 this.MeanDensityFormFactorLuminaCoresInNear,
                 this.Q25DensityFormFactorLuminaCoresInNear,
                 this.Q75DensityFormFactorLuminaCoresInNear);
-        }
-
-        public static string getCsvHeadForamt()
-        {
-            return
-                string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29}",
-                    "Class",
-                    "H - Q25",
-                    "H - Median",
-                    "H - Q75",
-                    "E - Q25",
-                    "E - Median",
-                    "E - Q75",
-                    "CountCores",
-                    "CountLumina",
-                    "MidCoresSize",
-                    "MeanCoresSize",
-                    "Q25CoresSize",
-                    "Q75CoresSize",
-                    "MidLuminaSize",
-                    "MeanLuminaSize",
-                    "Q25LuminaSize",
-                    "Q75LuminaSize",
-                    "DensityCores",
-                    "MidFormFactorCores",
-                    "MeanFormFactorCores",
-                    "Q25FormFactorCores",
-                    "Q75FormFactorCores",
-                    "MidDensityLuminaCoresInNear",
-                    "MeanDensityLuminaCoresInNear",
-                    "Q25DensityLuminaCoresInNear",
-                    "Q75DensityLuminaCoresInNear",
-                    "MidDensityFormFactorLuminaCoresInNear",
-                    "MeanDensityFormFactorLuminaCoresInNear",
-                    "Q25DensityFormFactorLuminaCoresInNear",
-                    "Q75DensityFormFactorLuminaCoresInNear");
         }
         
         public int CompareTo(TissueAnnotationClass other)

@@ -278,3 +278,4 @@ __pycache__/
 TissueDetection_Result/
 AnnotaionsExtractor_Result/
 HistoGenerator_Result/
+ClassificationDataGenerator_Result/
