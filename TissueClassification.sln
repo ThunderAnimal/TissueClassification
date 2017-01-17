@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassificationDataGenerator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segmentation", "Segmentation\Segmentation.csproj", "{56A82354-C8DD-493F-80B3-20742D92906D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WekaPicNetPlugin", "WekaPicNetPlugin\WekaPicNetPlugin.csproj", "{759BD189-C433-46C0-88D3-B5DD4973AC21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{56A82354-C8DD-493F-80B3-20742D92906D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56A82354-C8DD-493F-80B3-20742D92906D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56A82354-C8DD-493F-80B3-20742D92906D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759BD189-C433-46C0-88D3-B5DD4973AC21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759BD189-C433-46C0-88D3-B5DD4973AC21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759BD189-C433-46C0-88D3-B5DD4973AC21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759BD189-C433-46C0-88D3-B5DD4973AC21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
