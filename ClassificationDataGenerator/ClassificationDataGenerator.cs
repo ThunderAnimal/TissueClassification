@@ -21,7 +21,7 @@ namespace HistoGenerator
         /// Config Variablen
         /// </summary>
         private static bool isSave = false; //Save Pictures
-        private static int abort = 0; //Abort after x Anotions for each Dataset 0- disable
+        private static int abort = 1; //Abort after x Anotions for each Dataset 0- disable
 
         private static void Main(string[] args)
         {
@@ -67,13 +67,13 @@ namespace HistoGenerator
         private static TissueAnnotaionList getAnnotaions(String srcSlides, String outputPics)
         {
             TissueAnnotaionList annotationList = new TissueAnnotaionList();
-
+            int i = 0;
             //Get Anotaions from silde
             foreach (var slideName in Util.GetSlideFilenames(new String[] { srcSlides }))
             {
                 using (var slideCache = new SlideCache(slideName))
                 {
-                    int i = 0;
+                    
                     Parallel.ForEach(slideCache.Slide.GetAnnotations(), (annotation) =>
                     {
                         if (abort != 0)
@@ -235,7 +235,9 @@ namespace HistoGenerator
                             Console.WriteLine(tissueAnnotation + " exc:" + contained.Count);
                         }
                     });
-                }
+                    if(abort != 0 && i >= abort)
+                        return annotationList;
+                    }
             }
             return annotationList;
         }
