@@ -7,11 +7,15 @@ using SharpAccessory.Imaging.Filters;
 using System.IO;
 using VMscope.InteropCore.VirtualMicroscopy;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using SharpAccessory.Threading;
+using Segmentation;
+using SharpAccessory.Imaging.Automation;
+using SharpAccessory.Imaging.Segmentation;
 
 namespace HistoGenerator
 {
-    internal static class HistoGenerator
+    internal static class ClassificationDataGenerator
     {
         /// <summary>
         /// Config Variablen
@@ -96,7 +100,7 @@ namespace HistoGenerator
 
                             TissueAnnotationClass tissueAnnotation = new TissueAnnotationClass(annotation.Id, annotation.Name, slideCache.SlideName);
 
-                            //H und E Werte ermitteln
+                            //H und E Werte aus Bild ermitteln
                             var gpH = new ColorDeconvolution().Get1stStain(hImage, ColorDeconvolution.KnownStain.HaematoxylinEosin);
                             var gpE = new ColorDeconvolution().Get2ndStain(eImage, ColorDeconvolution.KnownStain.HaematoxylinEosin);
 
@@ -109,15 +113,93 @@ namespace HistoGenerator
                                 eHistogram[gpE.GetPixel(grayscalePixel.X, grayscalePixel.Y)]++;
                             }
 
+
+                            //Segmentation aus dem Bild ermitteln
+                            //Layers erstellen
+                            var luminaLayer = ObjectLayerCreate.CreateLuminaLayer(annotationBitmap);
+                            var coresLayer = ObjectLayerCreate.CreateCoresLayer(annotationBitmap);
+                            
+                            //Features dem layer hinzufügen
+                            coresLayer =
+                                ObjectLayerrUtils.AddFeatureFormFactor(
+                                    ObjectLayerrUtils.AddFeatureCenterPoint(coresLayer));
+                            luminaLayer =
+                                ObjectLayerrUtils.AddFeatureCoresInNear(
+                                    ObjectLayerrUtils.AddFeatureFormFactor(luminaLayer), coresLayer);
+
+
+                            //Alle Features ermitteln und in Listen schreiben --> sortiert um anschließend Mid und Avverage auszurechen
                             List<uint> hHistogramList = histogramToList(hHistogram);
                             List<uint> eHistogramList = histogramToList(eHistogram);
 
+                            List<uint> coresSizeList = ObjectLayerrUtils.GetFeatureValueList(coresLayer, "area");
+                            List<uint> luminaSizeList = ObjectLayerrUtils.GetFeatureValueList(luminaLayer, "area");
+                            List<uint> coresFormFactorList = ObjectLayerrUtils.GetFeatureValueList(coresLayer,
+                                "FormFactorOfContour");
+
+                            List<uint> luminaCoresInNear = new List<uint>();
+                            List<uint> luminaCoresInNearWithForm = new List<uint>();
+                            foreach (var imageObject in luminaLayer.Objects)
+                            {
+                                var coresInNear = imageObject.Features.GetFeatureByName("coresInNear").Value;
+                                var formFactor = imageObject.Features.GetFeatureByName("FormFactorOfContour").Value;
+                                var area = imageObject.Features.GetFeatureByName("area").Value;
+
+                                if(Math.Abs(coresInNear) <= 0) continue;
+
+                                luminaCoresInNear.Add((uint) (area / coresInNear));
+                                luminaCoresInNearWithForm.Add((uint) ((area * formFactor) / coresInNear));
+                            }
+                            luminaCoresInNear.Sort();
+                            luminaCoresInNearWithForm.Sort();
+
+                             //alle Features dem Object hinzufügen
                             tissueAnnotation.Q25H = calcQuantil(hHistogramList, 0.25);
                             tissueAnnotation.MeanH = calcQuantil(hHistogramList, 0.5);
                             tissueAnnotation.Q75H = calcQuantil(hHistogramList, 0.75);
+
                             tissueAnnotation.Q25E = calcQuantil(eHistogramList, 0.25);
                             tissueAnnotation.MeanE = calcQuantil(eHistogramList, 0.5);
                             tissueAnnotation.Q75E = calcQuantil(eHistogramList, 0.75);
+
+                            tissueAnnotation.CountCores = (uint) coresSizeList.Count;
+                            tissueAnnotation.CountLumina = (uint) luminaSizeList.Count;
+
+                            tissueAnnotation.MidCoresSize = calcMid(coresSizeList);
+                            tissueAnnotation.MeanCoresSize = calcQuantil(coresSizeList, 0.5);
+                            tissueAnnotation.Q25CoresSize = calcQuantil(coresSizeList, 0.25);
+                            tissueAnnotation.Q75CoresSize = calcQuantil(coresSizeList, 0.75);
+
+                            tissueAnnotation.MidLuminaSize = calcMid(luminaSizeList);
+                            tissueAnnotation.MeanLuminaSize = calcQuantil(luminaSizeList, 0.5);
+                            tissueAnnotation.Q25LuminaSize = calcQuantil(luminaSizeList, 0.25);
+                            tissueAnnotation.Q75LuminaSize = calcQuantil(luminaSizeList, 0.75);
+
+
+                            if (coresSizeList.Count == 0)
+                                tissueAnnotation.DensityCores = 0;
+                            else
+                                tissueAnnotation.DensityCores = (uint) ((annotationBitmap.Size.Height *
+                                                                         annotationBitmap.Size.Width) /
+                                                                        coresSizeList.Count);
+
+                            tissueAnnotation.MidFormFactorCores = calcMid(coresFormFactorList);
+                            tissueAnnotation.MeanFormFactorCores = calcQuantil(coresFormFactorList, 0.5);
+                            tissueAnnotation.Q25FormFactorCores = calcQuantil(coresFormFactorList, 0.25);
+                            tissueAnnotation.Q75FormFactorCores = calcQuantil(coresFormFactorList, 0.75);
+
+                            tissueAnnotation.MidDensityLuminaCoresInNear = calcMid(luminaCoresInNear);
+                            tissueAnnotation.MeanDensityLuminaCoresInNear = calcQuantil(luminaCoresInNear, 0.5);
+                            tissueAnnotation.Q25DensityLuminaCoresInNear = calcQuantil(luminaCoresInNear, 0.25);
+                            tissueAnnotation.Q75DensityLuminaCoresInNear = calcQuantil(luminaCoresInNear, 0.75);
+
+                            tissueAnnotation.MidDensityFormFactorLuminaCoresInNear = calcMid(luminaCoresInNearWithForm);
+                            tissueAnnotation.MeanDensityFormFactorLuminaCoresInNear =
+                                calcQuantil(luminaCoresInNearWithForm, 0.5);
+                            tissueAnnotation.Q25DensityFormFactorLuminaCoresInNear =
+                                calcQuantil(luminaCoresInNearWithForm, 0.25);
+                            tissueAnnotation.Q75DensityFormFactorLuminaCoresInNear =
+                                calcQuantil(luminaCoresInNearWithForm, 0.75);
 
                             //Zur Liste hinzufügren
                             annotationList.add(tissueAnnotation);
@@ -131,10 +213,6 @@ namespace HistoGenerator
                             Console.WriteLine(tissueAnnotation + " exc:" + contained.Count);
                         }
                     });
-                    /*foreach (var annotation in slideCache.Slide.GetAnnotations())
-                    {
-                       
-                    }*/
                 }
             }
             return annotationList;
@@ -142,7 +220,22 @@ namespace HistoGenerator
 
         private static uint calcQuantil(List<uint> list, double percentage)
         {
+            if (list.Count == 0)
+                return 0;
+
             return list.ElementAt((int)(list.Count * percentage));
+        }
+
+        private static uint calcMid(List<uint> list)
+        {
+            if (list.Count == 0)
+                return 0;
+            var sum = 0d;
+            foreach (var item in list)
+            {
+                sum += item;
+            }
+            return (uint) (sum / list.Count);
         }
 
         private static List<uint> histogramToList(uint[] histogram)

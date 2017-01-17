@@ -85,13 +85,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HistoGenerator.cs" />
+    <Compile Include="ClassificationDataGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TissueAnnotationClass.cs" />
     <Compile Include="TissueAnnotationList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Segmentation\Segmentation.csproj">
+      <Project>{56A82354-C8DD-493F-80B3-20742D92906D}</Project>
+      <Name>Segmentation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

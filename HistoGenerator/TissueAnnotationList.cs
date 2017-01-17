@@ -63,7 +63,7 @@ namespace HistoGenerator
         public void writeToCsv(string path)
         {
 
-            File.WriteAllText(path,"Class,H-Q25,H-Median,H-Q75,E-Q25,E-Median,E-Q75\n",System.Text.Encoding.UTF8);
+            File.WriteAllText(path, TissueAnnotationClass.getCsvHeadForamt() + "\n", System.Text.Encoding.UTF8);
             foreach(TissueAnnotationClass annotaion in tissueList)
             {
                 File.AppendAllText(path,annotaion.getCsvFormat() + "\n");
