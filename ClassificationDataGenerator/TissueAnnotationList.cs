@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 
-namespace HistoGenerator
+namespace ClassificatioDataGenerator
 {
     class TissueAnnotaionList
     {
@@ -37,6 +35,10 @@ namespace HistoGenerator
                     annotation.getAnnotaionClass().Equals("."))
                 {
                     toDelete.Add(annotation);
+                }
+                if (annotation.getAnnotaionClass().Equals("Fett"))
+                {
+                    annotation.setAnnotaionClass("Fettgewebe");
                 }
             }
             foreach (TissueAnnotationClass annotation in toDelete)

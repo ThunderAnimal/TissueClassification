@@ -1,12 +1,7 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
-namespace HistoGenerator
+namespace ClassificatioDataGenerator
 {
     class TissueAnnotationClass: IComparable<TissueAnnotationClass>
     {
@@ -48,6 +43,11 @@ namespace HistoGenerator
         public uint Q25DensityFormFactorLuminaCoresInNear { get; set; }
         public uint Q75DensityFormFactorLuminaCoresInNear { get; set; }
 
+        public TissueAnnotationClass()
+        {
+
+        }
+
         public TissueAnnotationClass(int annotaionId, String annotaionClass, String slideName)
         {
             this.slideName = slideName;
@@ -71,9 +71,19 @@ namespace HistoGenerator
         {
             this.annotaionClass = "other";
         }
+        public void setAnnotaionClass(String annotaionClass)
+        {
+            this.annotaionClass = annotaionClass;
+        }
         public override string ToString()
         {
             return string.Format("{0}.{1}.{2}", this.annotaionClass, this.slideName, this.annotaionId);
+        }
+
+        public TissueAnnotationClass ComputeFeatureValues(Bitmap image)
+        {
+            return ComputeImageFeatures.ComputeFeatures(this, image);
+
         }
         public string getCsvFormat()
         {
@@ -123,6 +133,7 @@ namespace HistoGenerator
             else
                 return this.annotaionClass.CompareTo(other.annotaionClass);
         }
+
         public TissueAnnotationClass Clone()
         {
             return (TissueAnnotationClass)this.MemberwiseClone();
