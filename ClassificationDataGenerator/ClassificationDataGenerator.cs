@@ -18,7 +18,7 @@ namespace ClassificatioDataGenerator
         /// Config Variablen
         /// </summary>
         private static bool isSave = false; //Save Pictures
-        private static int abort = 5; //Abort after x Anotions for each Dataset 0- disable
+        private static int abort = 0; //Abort after x Anotions for each Dataset 0- disable
 
         private static void Main(string[] args)
         {
@@ -26,6 +26,11 @@ namespace ClassificatioDataGenerator
             String srcSlides = args[0];
             String outCsv = args[1];
             String outputPics = args[2];
+
+            //Start der Verarbeitung
+            var startProcTime = DateTime.Now;
+            Console.WriteLine("Start: " + startProcTime);
+            Console.WriteLine("Verarbeite Daten...");
 
             //Nötige Ordner ertsellen 
             if (!Directory.Exists(outputPics))
@@ -41,7 +46,7 @@ namespace ClassificatioDataGenerator
             annotationList.sort();
 
             //Ergebnisse in CSV schreiben
-            Console.WriteLine("Results saved to:  {0} ", outCsv);
+            Console.WriteLine("\nSpeicher Daten...");
             annotationList.writeToCsv(outCsv + @"\data.csv");
             annotationList.groubByOnClassAndOthers("Fettgewebe").writeToCsv(outCsv + @"\dataFettgeweebe.csv");
             annotationList.groubByOnClassAndOthers("Tumor").writeToCsv(outCsv + @"\dataTumor.csv");
@@ -53,9 +58,15 @@ namespace ClassificatioDataGenerator
             annotationList.groubByOnClassAndOthers("DCIC").writeToCsv(outCsv + @"\dataDCIC.csv");
             annotationList.groubByOnClassAndOthers("Kalk").writeToCsv(outCsv + @"\dataKalk.csv");
             annotationList.groubByOnClassAndOthers("Normales Mammaepithel").writeToCsv(outCsv + @"\dataNormalesMammaepithel.csv");
+            Console.WriteLine("Results saved to:  {0} ", outCsv);
+
+            //Ender der Verarbeitung
+            var endProcTime = DateTime.Now;
+            Console.WriteLine("\n############ FINISHED ###############");
+            Console.WriteLine("Ende: " + endProcTime);
 
             //FINISH
-            Console.WriteLine("\n############ FINISHED ###############");
+            Console.Write("Benötigte Zeit: {0:F} Minuten", endProcTime.Subtract(startProcTime).TotalMinutes);
             Console.ReadKey();
         }
         
