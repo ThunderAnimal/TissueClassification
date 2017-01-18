@@ -4,15 +4,31 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{759BD189-C433-46C0-88D3-B5DD4973AC21}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A7C50143-F127-4658-B3BE-21DD99ECA139}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WekaPicNetPlugin</RootNamespace>
-    <AssemblyName>WekaPicNetPlugin</AssemblyName>
+    <RootNamespace>ClassificationDetection</RootNamespace>
+    <AssemblyName>ClassificationDetection</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,8 +36,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,12 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="#Accessory">
-      <HintPath>..\dlls\#Accessory.dll</HintPath>
-    </Reference>
-    <Reference Include="#Accessory.CognitionMaster">
-      <HintPath>..\dlls\#Accessory.CognitionMaster.exe</HintPath>
-    </Reference>
     <Reference Include="#Accessory.CognitionMaster.WholeSlideImageSupport">
       <HintPath>..\dlls\#Accessory.CognitionMaster.WholeSlideImageSupport.dll</HintPath>
     </Reference>
@@ -123,18 +135,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
     <Reference Include="VMscope.InteropCore">
       <HintPath>..\dlls\VMscope.InteropCore.DLL</HintPath>
-    </Reference>
-    <Reference Include="VMscope.VirtualSlideAccess">
-      <HintPath>..\dlls\VMscope.VirtualSlideAccess.DLL</HintPath>
     </Reference>
     <Reference Include="weka, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PicNetML.0.0.16\lib\net45\weka.dll</HintPath>
@@ -142,21 +144,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassifierExtensions.cs" />
-    <Compile Include="GlaukopisPlugin.cs" />
-    <Compile Include="InstancesExtensions.cs" />
-    <Compile Include="ObjectLayerExtensions.cs" />
+    <Compile Include="ClassificationDetection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="WekaPicNetPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassificationDataGenerator\ClassificationDataGenerator.csproj">
+      <Project>{3c5d3f02-43ab-465f-8d19-3f3a679b5516}</Project>
+      <Name>ClassificationDataGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Segmentation\Segmentation.csproj">
+      <Project>{56A82354-C8DD-493F-80B3-20742D92906D}</Project>
+      <Name>Segmentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WekaPicNetPlugin\WekaPicNetPlugin.csproj">
+      <Project>{759bd189-c433-46c0-88d3-b5dd4973ac21}</Project>
+      <Name>WekaPicNetPlugin</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetFileName)" C:\ProgramData\#Accessory\CognitionMaster\Plugins\*</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

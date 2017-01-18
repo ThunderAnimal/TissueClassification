@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Policy;
 
 namespace ClassificatioDataGenerator
 {
-    class TissueAnnotationClass: IComparable<TissueAnnotationClass>
+    public class TissueAnnotationClass: IComparable<TissueAnnotationClass>
     {
         private String slideName;
         private String annotaionClass;
@@ -123,7 +125,50 @@ namespace ClassificatioDataGenerator
                 this.Q25DensityFormFactorLuminaCoresInNear,
                 this.Q75DensityFormFactorLuminaCoresInNear);
         }
-        
+
+        public IEnumerable<Tuple<string, double>> GetFeatures()
+        {
+            var featureList = new List<Tuple<string, double>>
+            {
+                new Tuple<string, double>("H - Q25", Q25H),
+                new Tuple<string, double>("H - Median", MeanH),
+                new Tuple<string, double>("H - Q75", Q75H),
+                new Tuple<string, double>("E - Q25", Q25E),
+                new Tuple<string, double>("E - Median", MeanE),
+                new Tuple<string, double>("E - Q75", Q75E),
+                new Tuple<string, double>("CountCores", CountCores),
+                new Tuple<string, double>("CountLumina", CountLumina),
+                new Tuple<string, double>("MidCoresSize", MidCoresSize),
+                new Tuple<string, double>("MeanCoresSize", MeanCoresSize),
+                new Tuple<string, double>("Q25CoresSize", Q25CoresSize),
+                new Tuple<string, double>("Q75CoresSize", Q75CoresSize),
+                new Tuple<string, double>("MidLuminaSize", MidLuminaSize),
+                new Tuple<string, double>("MeanLuminaSize", MeanLuminaSize),
+                new Tuple<string, double>("Q25LuminaSize", Q25LuminaSize),
+                new Tuple<string, double>("Q75LuminaSize", Q75LuminaSize),
+                new Tuple<string, double>("DensityCores", DensityCores),
+                new Tuple<string, double>("MidFormFactorCores", MidFormFactorCores),
+                new Tuple<string, double>("MeanFormFactorCores", MeanFormFactorCores),
+                new Tuple<string, double>("Q25FormFactorCores", Q25FormFactorCores),
+                new Tuple<string, double>("Q75FormFactorCores", Q75FormFactorCores),
+                new Tuple<string, double>("MidFormFactorLuminaWithSize", MidFormFactorLuminaWithSize),
+                new Tuple<string, double>("MeanFormFactorLuminaWithSize", MeanFormFactorLuminaWithSize),
+                new Tuple<string, double>("Q25FormFactorLuminaWithSize", Q25FormFactorLuminaWithSize),
+                new Tuple<string, double>("Q75FormFactorLuminaWithSize", Q75FormFactorLuminaWithSize),
+                new Tuple<string, double>("MidDensityLuminaCoresInNear", MidDensityLuminaCoresInNear),
+                new Tuple<string, double>("MeanDensityLuminaCoresInNear", MeanDensityLuminaCoresInNear),
+                new Tuple<string, double>("Q25DensityLuminaCoresInNear", Q25DensityLuminaCoresInNear),
+                new Tuple<string, double>("Q75DensityLuminaCoresInNear", Q75DensityLuminaCoresInNear),
+                new Tuple<string, double>("MidDensityFormFactorLuminaCoresInNear", MidDensityFormFactorLuminaCoresInNear),
+                new Tuple<string, double>("MeanDensityFormFactorLuminaCoresInNear",
+                    MeanDensityFormFactorLuminaCoresInNear),
+                new Tuple<string, double>("Q25DensityFormFactorLuminaCoresInNear", Q25DensityFormFactorLuminaCoresInNear),
+                new Tuple<string, double>("Q75DensityFormFactorLuminaCoresInNear", Q75DensityFormFactorLuminaCoresInNear)
+            };
+
+
+            return featureList;
+        } 
         public int CompareTo(TissueAnnotationClass other)
         {
             // A null value means that this object is greater.

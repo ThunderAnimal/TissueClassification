@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Glaukopis.SharpAccessoryIntegration;
 using Segmentation;
 using SharpAccessory.Imaging.Filters;
+using SharpAccessory.Imaging.Processors;
 
 namespace ClassificatioDataGenerator
 {
-    class ComputeImageFeatures
+    public class ComputeImageFeatures
     {
         public static TissueAnnotationClass ComputeFeatures(TissueAnnotationClass tissueAnnotationOld, Bitmap image)
         {
@@ -145,6 +146,32 @@ namespace ClassificatioDataGenerator
             }
         }
 
+        public static bool IsTissue(Bitmap image)
+        {
+            const double GRENZ_ENTROPIE = 0.1;
+
+            var bitmapProcessor = new BitmapProcessor(image);//liefert schnelleren Zugriff auf die Pixel-Werte, alternativ auch SharpAccessory.Imaging.Processors.GrayscaleProcessor
+
+            int[] greyArray = new int[256];
+
+            for (var y = 0; y < bitmapProcessor.Height; y++)
+            {
+                for (var x = 0; x < bitmapProcessor.Width; x++)
+                {
+                    var r = bitmapProcessor.GetRed(x, y);
+                    var g = bitmapProcessor.GetGreen(x, y);
+                    var b = bitmapProcessor.GetBlue(x, y);
+
+                    var grauwert = (int)(r + g + b) / 3;
+                    greyArray[grauwert]++;
+                }
+            }
+            bitmapProcessor.Dispose();
+
+            //Calculate Shannon Entropie
+            return calcEntropie(greyArray) > GRENZ_ENTROPIE;
+        }
+
         private static uint calcQuantil(List<uint> list, double percentage)
         {
             if (list.Count == 0)
@@ -176,6 +203,37 @@ namespace ClassificatioDataGenerator
                 }
             }
             return list;
+        }
+
+        //Berechnung der Entropie Einehit bits/pixel
+        private static double calcEntropie(int[] absoluteHistogramm)
+        {
+            double[] normiertesHistogramm = new double[absoluteHistogramm.Length];
+
+            double entropie = 0;
+            int countPixel = 0;
+
+            //Normierte Histogramm ermitteln
+            foreach (int count in absoluteHistogramm)
+            {
+                countPixel += count;
+            }
+            for (int i = 0; i < absoluteHistogramm.Length; i++)
+            {
+                normiertesHistogramm[i] = (double)absoluteHistogramm[i] / countPixel;
+            }
+
+            //Entropie ermitteln
+            for (int i = 0; i < normiertesHistogramm.Length; i++)
+            {
+                if (normiertesHistogramm[i] > 0)
+                {
+                    entropie += normiertesHistogramm[i] * Math.Log(normiertesHistogramm[i], 2);
+                }
+            }
+            entropie = entropie * -1;
+
+            return entropie;
         }
     }
 }
