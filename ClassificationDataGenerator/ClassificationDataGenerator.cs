@@ -107,7 +107,7 @@ namespace ClassificatioDataGenerator
 
                             TissueAnnotationClass tissueAnnotation = new TissueAnnotationClass(annotation.Id, annotation.Name, slideCache.SlideName);
 
-                            //Werte Berechnen
+                            //Werte Berechnsen
                             tissueAnnotation = tissueAnnotation.ComputeFeatureValues(annotationBitmap);
 
                             //Zur Liste hinzufügren
