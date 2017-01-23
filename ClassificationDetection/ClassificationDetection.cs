@@ -48,7 +48,7 @@ namespace ClassificationDetection
                     ComputeClass(tissueSlidePartitioner, slideCache);
 
                     //Draw Heatmaps
-                    drawHeatMapAll(tissueSlidePartitioner, slideCache);
+                    DrawHeatMapAll(tissueSlidePartitioner, slideCache);
                 }
             }
           
@@ -80,7 +80,7 @@ namespace ClassificationDetection
                     {
                         var tissueAnnotation = new TissueAnnotationClass();
                         tissueAnnotation = tissueAnnotation.ComputeFeatureValues(tileImage);
-                        classStr = _classifier.Classify(_dataSet,
+                        classStr = ClassifierExtensions.Classify(_classifier, _dataSet,
                             tissueAnnotation.GetFeatures());
                         switch (classStr)
                         {
@@ -122,7 +122,7 @@ namespace ClassificationDetection
             });
         }
 
-        private static void drawHeatMapAll(SlidePartitioner<TissuAnnotaionEnum> tissueSlidePartitioner, SlideCache slideCache)
+        private static void DrawHeatMapAll(SlidePartitioner<TissuAnnotaionEnum> tissueSlidePartitioner, SlideCache slideCache)
         {
             Func<TissuAnnotaionEnum, Color> f = annotaion =>
             {
@@ -162,7 +162,7 @@ namespace ClassificationDetection
             }
         }
 
-        private static void drawHeatMapOneClass(SlidePartitioner<TissuAnnotaionEnum> tissueSlidePartitioner, SlideCache slideCache, TissuAnnotaionEnum annotaion)
+        private static void DrawHeatMapOneClass(SlidePartitioner<TissuAnnotaionEnum> tissueSlidePartitioner, SlideCache slideCache, TissuAnnotaionEnum annotaion)
         {
             
         }

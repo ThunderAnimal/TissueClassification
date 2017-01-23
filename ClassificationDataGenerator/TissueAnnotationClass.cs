@@ -166,7 +166,6 @@ namespace ClassificatioDataGenerator
                 new Tuple<string, double>("Q75DensityFormFactorLuminaCoresInNear", Q75DensityFormFactorLuminaCoresInNear)
             };
 
-
             return featureList;
         } 
         public int CompareTo(TissueAnnotationClass other)
