@@ -4,7 +4,7 @@ using ClassificatioDataGenerator;
 using weka.classifiers;
 using weka.core;
 using Glaukopis.Adapters.PicNetML;
-
+using ClassificationDetection;
 
 namespace ClassificationDetectionTest
 {
@@ -15,18 +15,18 @@ namespace ClassificationDetectionTest
             //Eingabe Parameter
             var inPathPicture = args[0];
             var inPathDataset = args[1];
-            //Random Forest --> show Log
+            //J48
             var inPathClassifierTree = args[2];
-            //IterativeClassifierOptimizer
+            //Bagging
             var inPathClassifierMeta = args[3];
-            //JRip
+            //PART
             var inPathClassifierRules = args[4];
             //lBk
-            var inPathClassifierLayz = args[5];
+            //var inPathClassifierLayz = args[5];
             //SimpleLogistic
-            var inPathClassifierFunctions = args[6];
+            //var inPathClassifierFunctions = args[6];
             //BayesNet
-            var inPathClassifierBayes = args[7];
+            //var inPathClassifierBayes = args[7];
 
             //Start der Verarbeitung
             var startProcTime = DateTime.Now;
@@ -42,9 +42,9 @@ namespace ClassificationDetectionTest
             var classifierTree = (Classifier)SerializationHelper.read(inPathClassifierTree);
             var classifierMeta = (Classifier)SerializationHelper.read(inPathClassifierMeta);
             var classifierRules = (Classifier)SerializationHelper.read(inPathClassifierRules);
-            var classifierLayz = (Classifier)SerializationHelper.read(inPathClassifierLayz);
-            var classifierFunctions = (Classifier)SerializationHelper.read(inPathClassifierFunctions);
-            var classifierBayes = (Classifier)SerializationHelper.read(inPathClassifierBayes);
+            //var classifierLayz = (Classifier)SerializationHelper.read(inPathClassifierLayz);
+            //var classifierFunctions = (Classifier)SerializationHelper.read(inPathClassifierFunctions);
+            //var classifierBayes = (Classifier)SerializationHelper.read(inPathClassifierBayes);
 
             var image = new Bitmap(inPathPicture);
             var tissueAnnotaionClass = ComputeFeatues(image);
@@ -52,9 +52,11 @@ namespace ClassificationDetectionTest
             Console.WriteLine("Result Tree: {0}", showOutput(ComputeClass(tissueAnnotaionClass,classifierTree, dataSet)));
             Console.WriteLine("Result Meta: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierMeta, dataSet)));
             Console.WriteLine("Result Rules: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierRules, dataSet)));
-            Console.WriteLine("Result Layz: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierLayz, dataSet)));
-            Console.WriteLine("Result Functions: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierFunctions, dataSet)));
-            Console.WriteLine("Result Bayes: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierBayes, dataSet)));
+            Console.WriteLine("Result OWN J48: {0}", showOutput(ClassificationOwn.ClassifyJ48(tissueAnnotaionClass)));
+            Console.WriteLine("Result OWN JRip: {0}", showOutput(ClassificationOwn.ClassifyJRip(tissueAnnotaionClass)));
+            //Console.WriteLine("Result Layz: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierLayz, dataSet)));
+            //Console.WriteLine("Result Functions: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierFunctions, dataSet)));
+            //Console.WriteLine("Result Bayes: {0}", showOutput(ComputeClass(tissueAnnotaionClass, classifierBayes, dataSet)));
 
             //Ender der Verarbeitung
             var endProcTime = DateTime.Now;

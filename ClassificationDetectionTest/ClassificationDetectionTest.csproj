@@ -172,6 +172,10 @@
       <Project>{3c5d3f02-43ab-465f-8d19-3f3a679b5516}</Project>
       <Name>ClassificationDataGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClassificationDetection\ClassificationDetection.csproj">
+      <Project>{A7C50143-F127-4658-B3BE-21DD99ECA139}</Project>
+      <Name>ClassificationDetection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Segmentation\Segmentation.csproj">
       <Project>{56A82354-C8DD-493F-80B3-20742D92906D}</Project>
       <Name>Segmentation</Name>
