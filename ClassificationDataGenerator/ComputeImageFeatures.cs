@@ -148,7 +148,7 @@ namespace ClassificatioDataGenerator
 
         public static bool IsTissue(Bitmap image)
         {
-            const double GRENZ_ENTROPIE = 0.1;
+            const double GRENZ_ENTROPIE = 0.5;
 
             var bitmapProcessor = new BitmapProcessor(image);//liefert schnelleren Zugriff auf die Pixel-Werte, alternativ auch SharpAccessory.Imaging.Processors.GrayscaleProcessor
 

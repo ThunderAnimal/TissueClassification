@@ -33,7 +33,7 @@ namespace WekaPicNet{
 		private Classifier classifier;
 		protected override void OnLoad(EventArgs e){
 			base.OnLoad(e);
-			Accessory.RedirectAssemblyBinding(@"d:\_UNI\TissueClassification\packages\PicNetML.0.0.16\lib\net45\");
+			Accessory.RedirectAssemblyBinding(@"W:\_Uni\TissueClassification\packages\PicNetML.0.0.16\lib\net45\");
 			this.CreateTabContainer("Weka-PicNet");
 			this.TabContainer.Enabled=true;
 			(new Button{Text="apply classifier",Parent=this.TabContainer,Dock=DockStyle.Top}).Click+=delegate{

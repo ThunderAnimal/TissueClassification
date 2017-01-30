@@ -44,7 +44,7 @@ namespace ClassificationDetection
                 {
                     //Compute Class
                     var tissueSlidePartitioner = new SlidePartitioner<Dictionary<string, TissuAnnotaionEnum>>(slideCache.Slide, 1f,
-                        new Size(300, 300));
+                        new Size(500, 500));
                     ComputeClass(tissueSlidePartitioner, slideCache);
 
                     //Draw Heatmaps
@@ -77,7 +77,7 @@ namespace ClassificationDetection
                     classifyDic.Add("ownClassifyJRip", ClassificationOwn.ClassifyJRip(tissueAnnotaion));
 
                     //Funktioiert leider nicht, immer leer ""
-                    classifyDic.Add("wekaClassifyBagging",ClassifyWeka(tissueAnnotaion, _classifier, _dataSet));
+                    //classifyDic.Add("wekaClassifyBagging",ClassifyWeka(tissueAnnotaion, _classifier, _dataSet));
 
                     tile.Data = classifyDic;
                     Console.WriteLine(slideCache.SlideName + "-" + tile.Index + " done - Class: " + showOutput(tile.Data["ownClassificationJ48"]));
@@ -164,13 +164,13 @@ namespace ClassificationDetection
             Func<Dictionary<String, TissuAnnotaionEnum>, Color> drawWekaClassificationBaggingFunc = classifyDic => TissuAnnotaionToColor(classifyDic["wekaClassifyBagging"]);
             Func< Dictionary < String, TissuAnnotaionEnum >, Color > drawOwnClassificationJ48Func = classifyDic => TissuAnnotaionToColor(classifyDic["ownClassificationJ48"]);
             Func<Dictionary<String, TissuAnnotaionEnum>, Color> drawOwnClassificationJRipFunc = classifyDic => TissuAnnotaionToColor(classifyDic["ownClassifyJRip"]);
-            using (var heatMap = tissueSlidePartitioner.GenerateHeatMap(drawWekaClassificationBaggingFunc))
+/*            using (var heatMap = tissueSlidePartitioner.GenerateHeatMap(drawWekaClassificationBaggingFunc))
             {
                 slideCache.SetImage("ClassificationDetection_wekaClassifyBagging", heatMap);
-            }
+            }*/
             using (var heatMap = tissueSlidePartitioner.GenerateHeatMap(drawOwnClassificationJ48Func))
             {
-                slideCache.SetImage("ClassificationDetection_ownClassifyJRip", heatMap);
+                slideCache.SetImage("ClassificationDetection_ownClassifyJ48", heatMap);
             }
             using (var heatMap = tissueSlidePartitioner.GenerateHeatMap(drawOwnClassificationJRipFunc))
             {
